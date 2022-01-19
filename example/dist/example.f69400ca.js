@@ -79190,8 +79190,8 @@ object-assign
 
         function _templateObject5() {
           var data = _taggedTemplateLiteralLoose([
-            '\n      /* animation: ',
-            ' 1s infinite alternate; */\n      box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5);\n\n      &:after,\n      &:before {\n        border: 0 solid;\n        border-image-source: ',
+            '\n      animation: ',
+            ' 1s infinite alternate;\n      box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5);\n\n      &:after,\n      &:before {\n        border: 0 solid;\n        border-image-source: ',
             ";\n        border-image-slice: 1;\n        content: ' ';\n        opacity: 0;\n        height: 0;\n        transition: opacity 0.6s, width 0.6s, height 0.6s;\n        position: absolute;\n        width: 0;\n      }\n\n      &:after {\n        border-top: ",
             ';\n        border-left: ',
             ';\n        top: 0;\n        left: 0;\n      }\n\n      &:before {\n        bottom: 0px;\n        right: 0px;\n        border-bottom: ',
@@ -79209,8 +79209,8 @@ object-assign
 
         function _templateObject4() {
           var data = _taggedTemplateLiteralLoose([
-            '\n      /* animation: ',
-            ' 1s 1; */\n      background: ',
+            '\n      animation: ',
+            ' 1s 1;\n      background: ',
             ';\n    ',
           ]);
 
@@ -79587,12 +79587,19 @@ object-assign
               if (learned < skill.levels.length) {
                 setLearned(learned + 1);
                 console.log(learned);
+                console.log(skill.levels.length - 1);
+
+                if (learned < skill.levels.length - 1) {
+                  handleNodeSelect(id, UNLOCKED_STATE, skill);
+                  return updateSkillState(id, UNLOCKED_STATE, optional);
+                }
+
                 return;
               }
-            } // return;
+            }
 
-            handleNodeSelect(id, UNLOCKED_STATE, skill);
-            return updateSkillState(id, UNLOCKED_STATE, optional);
+            return; // handleNodeSelect(id, UNLOCKED_STATE, skill);
+            // return updateSkillState(id, UNLOCKED_STATE, optional);
           }
 
           React.useEffect(function() {
@@ -82669,7 +82676,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '64281' + '/'
+            protocol + '://' + hostname + ':' + '54188' + '/'
           );
 
           ws.onmessage = function(event) {
