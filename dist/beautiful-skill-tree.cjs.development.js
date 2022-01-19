@@ -1094,7 +1094,8 @@ function SkillNode(_ref) {
       if (learned < skill.levels.length) {
         setLearned(learned + 1);
         console.log(learned);
-        return;
+        handleNodeSelect(id, UNLOCKED_STATE, skill);
+        return updateSkillState(id, UNLOCKED_STATE, optional);
       }
     } // return;
 
