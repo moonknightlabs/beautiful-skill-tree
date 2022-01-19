@@ -25,6 +25,7 @@ export interface Props {
   closedByDefault?: boolean;
   savedData?: SavedDataType;
   disabled?: boolean;
+  currentLevel: string;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,
@@ -42,6 +43,7 @@ function SkillTree({
   title,
   description,
   closedByDefault,
+  currentLevel,
   treeId,
   savedData,
   handleSave,
@@ -102,7 +104,8 @@ function SkillTree({
                 return (
                   <React.Fragment key={skill.id}>
                     <SkillTreeSegment
-                      shouldBeUnlocked
+                      shouldBeUnlocked={currentLevel >= skill.requiredLevel}
+                      currentLevel={currentLevel}
                       skill={skill}
                       hasParent={false}
                       parentPosition={0}

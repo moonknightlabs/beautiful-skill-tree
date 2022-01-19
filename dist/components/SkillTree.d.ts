@@ -14,6 +14,7 @@ export interface Props {
   closedByDefault?: boolean;
   savedData?: SavedDataType;
   disabled?: boolean;
+  currentLevel: string;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,
@@ -26,6 +27,7 @@ declare function SkillTree({
   title,
   description,
   closedByDefault,
+  currentLevel,
   treeId,
   savedData,
   handleSave,

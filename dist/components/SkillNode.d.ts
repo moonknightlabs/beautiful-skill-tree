@@ -3,6 +3,7 @@ import { Skill, NodeState } from '../models';
 interface Props {
   skill: Skill;
   nodeState: NodeState;
+  currentLevel: string;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
   handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
@@ -15,8 +16,8 @@ interface Props {
 declare function SkillNode({
   skill,
   nodeState,
+  currentLevel,
   incSkillCount,
-  decSkillCount,
   updateSkillState,
   handleNodeSelect,
 }: Props): JSX.Element;

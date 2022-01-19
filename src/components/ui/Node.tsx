@@ -224,6 +224,7 @@ const LevelNode = styled.div`
   font-size: 14px;
   bottom: -10px;
   right: -25px;
+  z-index: 99;
 `;
 
 const TextNode = styled.div`

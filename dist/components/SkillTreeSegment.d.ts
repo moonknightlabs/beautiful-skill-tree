@@ -4,6 +4,7 @@ declare type Props = {
   parentPosition: number;
   parentHasMultipleChildren: boolean;
   shouldBeUnlocked: boolean;
+  currentLevel: string;
 } & typeof SkillTreeSegment.defaultProps;
 declare function SkillTreeSegment({
   skill,
@@ -11,6 +12,7 @@ declare function SkillTreeSegment({
   parentHasMultipleChildren,
   parentPosition,
   shouldBeUnlocked,
+  currentLevel,
 }: Props): JSX.Element;
 declare namespace SkillTreeSegment {
   var defaultProps: {

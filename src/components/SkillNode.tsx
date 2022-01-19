@@ -1,20 +1,16 @@
 import * as React from 'react';
 import { throttle } from 'lodash';
-import styled, { BaseThemedCssFunction } from 'styled-components';
+import styled from 'styled-components';
 import { LOCKED_STATE, UNLOCKED_STATE, SELECTED_STATE } from './constants';
 import SkillTreeSegment from './SkillTreeSegment';
 import Tooltip from './tooltip/Tooltip';
 import { Skill, NodeState } from '../models';
 import Node from './ui/Node';
-import { SkillThemeType } from '../';
-
-const keyframes = require('styled-components').keyframes;
-const css: BaseThemedCssFunction<SkillThemeType> = require('styled-components')
-  .css;
 
 interface Props {
   skill: Skill;
   nodeState: NodeState;
+  currentLevel: string;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
   handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
@@ -25,22 +21,18 @@ interface Props {
   ) => void;
 }
 
-interface SkillNodeOverlayProps {
-  childWidth: number;
-  selected: boolean;
-}
-
 function SkillNode({
   skill,
   nodeState,
+  currentLevel,
   incSkillCount,
-  decSkillCount,
+  // decSkillCount,
   updateSkillState,
   handleNodeSelect = () => null,
 }: Props) {
   const { children, title, tooltip, id, optional } = skill;
   const [parentPosition, setParentPosition] = React.useState(0);
-
+  const [learned, setLearned] = React.useState(skill.learned);
   const skillNodeRef: React.RefObject<HTMLDivElement> = React.useRef(null);
   const childWidth: React.MutableRefObject<number> = React.useRef(0);
 
@@ -67,13 +59,14 @@ function SkillNode({
     }
 
     if (nodeState === UNLOCKED_STATE) {
-      incSkillCount(optional);
-      handleNodeSelect(id, SELECTED_STATE, skill);
-      return updateSkillState(id, SELECTED_STATE, optional);
+      if (learned < skill.levels.length) {
+        setLearned(learned + 1);
+        console.log(learned);
+        return;
+      }
     }
-
+    // return;
     handleNodeSelect(id, UNLOCKED_STATE, skill);
-    decSkillCount(optional);
     return updateSkillState(id, UNLOCKED_STATE, optional);
   }
 
@@ -90,16 +83,18 @@ function SkillNode({
     };
   }, []);
 
+  React.useEffect(() => {
+    if (learned === skill.levels.length) {
+      incSkillCount(optional);
+      handleNodeSelect(id, SELECTED_STATE, skill);
+      return updateSkillState(id, SELECTED_STATE, optional);
+    }
+  }, [learned]);
   const hasMultipleChildren = children.length > 1;
 
   return (
     <React.Fragment>
       <StyledSkillNode>
-        <SkillNodeOverlay
-          selected={nodeState === SELECTED_STATE}
-          childWidth={childWidth.current}
-          data-testid="skill-node-overlay"
-        />
         <Tooltip title={title} tooltip={tooltip}>
           <Node
             handleClick={handleClick}
@@ -118,11 +113,12 @@ function SkillNode({
               <SkillTreeSegment
                 key={child.id}
                 hasParent
+                currentLevel={currentLevel}
                 parentPosition={parentPosition}
                 parentHasMultipleChildren={hasMultipleChildren}
                 shouldBeUnlocked={
-                  (optional && nodeState === UNLOCKED_STATE) ||
-                  nodeState === SELECTED_STATE
+                  nodeState === SELECTED_STATE &&
+                  currentLevel >= child.requiredLevel
                 }
                 skill={child}
               />
@@ -136,47 +132,10 @@ function SkillNode({
 
 export default React.memo(SkillNode);
 
-const fadeout = keyframes`
-  from,
-  30% {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-`;
-
 const StyledSkillNode = styled.div`
   margin: 0 auto;
   position: relative;
   width: fit-content;
-`;
-
-const SkillNodeOverlay = styled.span<SkillNodeOverlayProps>`
-  background-color: ${({ theme }) => theme.nodeOverlayColor};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  height: 100%;
-  left: 3px;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  width: ${props => props.childWidth + 4}px;
-  z-index: 10;
-
-  @media (min-width: 410px) {
-    left: 8px;
-  }
-
-  @media (min-width: 900px) {
-    left: 16px;
-  }
-
-  ${props =>
-    props.selected &&
-    css`
-      animation: ${fadeout} 3.5s 1;
-    `}
 `;
 
 const SkillTreeSegmentWrapper = styled.div`

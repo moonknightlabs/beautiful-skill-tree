@@ -51,12 +51,12 @@ interface BaseSkill {
   tooltip: Tooltip;
   children: Skill[];
   levels: SkillLevel[];
-}
-interface MajorSkill extends BaseSkill {
-  icon: string;
   learned: number;
   parentId: number;
   requiredLevel: string;
+}
+interface MajorSkill extends BaseSkill {
+  icon: string;
 }
 
 export interface SkillLevel {

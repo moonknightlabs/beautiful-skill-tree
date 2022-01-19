@@ -12,6 +12,7 @@ type Props = {
   parentPosition: number;
   parentHasMultipleChildren: boolean;
   shouldBeUnlocked: boolean;
+  currentLevel: string;
 } & typeof SkillTreeSegment.defaultProps;
 
 function SkillTreeSegment({
@@ -20,6 +21,7 @@ function SkillTreeSegment({
   parentHasMultipleChildren,
   parentPosition,
   shouldBeUnlocked,
+  currentLevel,
 }: Props) {
   const {
     mounting,
@@ -86,6 +88,7 @@ function SkillTreeSegment({
           incSkillCount={useCallback(incrementSelectedCount, [])}
           decSkillCount={useCallback(decrementSelectedCount, [])}
           updateSkillState={updateSkillState}
+          currentLevel={currentLevel}
           skill={skill}
           nodeState={nodeState}
           handleNodeSelect={handleNodeSelect}

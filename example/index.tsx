@@ -132,6 +132,7 @@ const App = () => {
                   title="Programming Tree"
                   data={createSkills(tree)}
                   handleSave={handleSave}
+                  currentLevel="0"
                 />
                 <DisabledSkillTree
                   handleNodeSelect={handleNodeSelect}
