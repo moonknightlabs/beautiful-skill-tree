@@ -7,6 +7,7 @@ import {
   SavedDataType,
   SkillData,
   NodeSelectEvent,
+  Skill,
 } from '../models';
 import AppContext, { IAppContext } from './AppContext';
 import { SELECTED_STATE, LOCKED_STATE } from '../components/constants';
@@ -45,7 +46,7 @@ export interface ISkillContext {
     optional?: boolean
   ) => void;
   setSkillCount: (skillCount: number) => void;
-  handleNodeSelect: (key: string, state: NodeState) => void;
+  handleNodeSelect: (key: string, state: NodeState, skill: Skill) => void;
   incrementSelectedCount: VoidFunction;
   decrementSelectedCount: VoidFunction;
 }
@@ -195,8 +196,8 @@ export class SkillTreeProvider extends React.Component<Props, State> {
     });
   };
 
-  handleNodeSelect = (key: string, state: NodeState) => {
-    return this.props.sendNodeSelectDataToClient({ key, state });
+  handleNodeSelect = (key: string, state: NodeState, skill: Skill) => {
+    return this.props.sendNodeSelectDataToClient({ key, state, skill });
   };
 
   updateSkillState = (

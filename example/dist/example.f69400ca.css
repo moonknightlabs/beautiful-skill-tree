@@ -1,0 +1,104 @@
+.tippy-tooltip[data-animation='fade'][data-state='hidden'] {
+  opacity: 0;
+}
+.tippy-iOS {
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent;
+}
+.tippy-popper {
+  pointer-events: none;
+  max-width: calc(100vw - 10px);
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-property: transform;
+}
+.tippy-tooltip {
+  position: relative;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  background-color: #333;
+  transition-property: visibility, opacity, transform;
+  outline: 0;
+}
+.tippy-tooltip[data-placement^='top'] > .tippy-arrow {
+  border-width: 8px 8px 0;
+  border-top-color: #333;
+  margin: 0 3px;
+  transform-origin: 50% 0;
+  bottom: -7px;
+}
+.tippy-tooltip[data-placement^='bottom'] > .tippy-arrow {
+  border-width: 0 8px 8px;
+  border-bottom-color: #333;
+  margin: 0 3px;
+  transform-origin: 50% 7px;
+  top: -7px;
+}
+.tippy-tooltip[data-placement^='left'] > .tippy-arrow {
+  border-width: 8px 0 8px 8px;
+  border-left-color: #333;
+  margin: 3px 0;
+  transform-origin: 0 50%;
+  right: -7px;
+}
+.tippy-tooltip[data-placement^='right'] > .tippy-arrow {
+  border-width: 8px 8px 8px 0;
+  border-right-color: #333;
+  margin: 3px 0;
+  transform-origin: 7px 50%;
+  left: -7px;
+}
+.tippy-tooltip[data-interactive][data-state='visible'] {
+  pointer-events: auto;
+}
+.tippy-tooltip[data-inertia][data-state='visible'] {
+  transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+}
+.tippy-arrow {
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+.tippy-content {
+  padding: 5px 9px;
+}
+.tippy-tooltip[data-animation='shift-away'][data-placement^='top'][data-state='hidden'] {
+  transform: translateY(10px);
+}
+.tippy-tooltip[data-animation='shift-away'][data-placement^='bottom'][data-state='hidden'] {
+  transform: translateY(-10px);
+}
+.tippy-tooltip[data-animation='shift-away'][data-placement^='left'][data-state='hidden'] {
+  transform: translateX(10px);
+}
+.tippy-tooltip[data-animation='shift-away'][data-placement^='right'][data-state='hidden'] {
+  transform: translateX(-10px);
+}
+.tippy-tooltip[data-animation='shift-away'][data-state='hidden'] {
+  opacity: 0;
+}
+body {
+  background-color: #282c34;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.Example__header {
+  padding: 0 16px;
+}
+
+.Example__heading {
+  text-align: center;
+  width: 300px;
+}
+
+.Example__reset-button {
+  height: 40px;
+}
+
+/*# sourceMappingURL=/example.f69400ca.css.map */

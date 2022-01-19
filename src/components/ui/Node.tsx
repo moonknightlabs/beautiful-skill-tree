@@ -35,6 +35,7 @@ const Node = React.forwardRef(function Node(
   ref: React.Ref<HTMLDivElement>
 ) {
   const { handleClick, id, currentState, skill } = props;
+  // console.log('Skill', skill);
   const { color = 'default' } = skill;
   const [isIOS, setIsIOS] = React.useState(false);
 
@@ -68,6 +69,9 @@ const Node = React.forwardRef(function Node(
       {'icon' in skill ? (
         <IconNode>
           <Icon title="node-icon" src={skill.icon} containerWidth={64} />
+          <LevelNode>
+            {skill.learned}/{skill.levels.length}
+          </LevelNode>
         </IconNode>
       ) : (
         <TextNode>
@@ -210,6 +214,16 @@ const StyledNode = styled.div<StyledNodeProps>`
 
 const IconNode = styled.div`
   width: ${({ theme }) => theme.nodeIconNodeWidth};
+`;
+
+const LevelNode = styled.div`
+  background-color: black;
+  position: absolute;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  bottom: -10px;
+  right: -25px;
 `;
 
 const TextNode = styled.div`

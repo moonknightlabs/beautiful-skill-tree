@@ -17,7 +17,7 @@ interface Props {
   nodeState: NodeState;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
-  handleNodeSelect?: (key: string, state: NodeState) => void;
+  handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
   updateSkillState: (
     key: string,
     updatedState: NodeState,
@@ -68,11 +68,11 @@ function SkillNode({
 
     if (nodeState === UNLOCKED_STATE) {
       incSkillCount(optional);
-      handleNodeSelect(id, SELECTED_STATE);
+      handleNodeSelect(id, SELECTED_STATE, skill);
       return updateSkillState(id, SELECTED_STATE, optional);
     }
 
-    handleNodeSelect(id, UNLOCKED_STATE);
+    handleNodeSelect(id, UNLOCKED_STATE, skill);
     decSkillCount(optional);
     return updateSkillState(id, UNLOCKED_STATE, optional);
   }

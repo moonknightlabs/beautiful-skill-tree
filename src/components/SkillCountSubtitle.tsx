@@ -3,13 +3,10 @@ import SkillContext from '../context/SkillContext';
 import styled from 'styled-components';
 
 function SkillCountSubtitle() {
-  const { skillCount, selectedCount } = useContext(SkillContext);
-  const percentageCompleted = Math.ceil((selectedCount / skillCount) * 100);
+  const { skillCount } = useContext(SkillContext);
 
   return (
-    <StyledSkillCountSubtitle>
-      {skillCount} skills | {percentageCompleted}%
-    </StyledSkillCountSubtitle>
+    <StyledSkillCountSubtitle>{skillCount} skills</StyledSkillCountSubtitle>
   );
 }
 

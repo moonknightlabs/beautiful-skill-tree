@@ -23,6 +23,8 @@ import {
   hpSavedData,
   pushUpData,
   webDevData,
+  createSkills,
+  tree,
 } from './mockData';
 import { ContextStorage } from '../src/models';
 import FilterInput from './components/FIlterInput';
@@ -37,8 +39,9 @@ function handleSave(
 }
 
 function handleNodeSelect(e: NodeSelectEvent) {
-  console.log('selected node - ', e.key);
-  console.log('new state - ', e.state);
+  console.log(e);
+  // console.log('selected node - ', e.key);
+  // console.log('new state - ', e.state);
 }
 
 const App = () => {
@@ -90,7 +93,7 @@ const App = () => {
                 <FilterInput handleFilter={handleFilter} />
               </nav>
               <div>
-                <SkillTree
+                {/* <SkillTree
                   closedByDefault
                   treeId="sp"
                   handleNodeSelect={handleNodeSelect}
@@ -122,12 +125,12 @@ const App = () => {
                   data={legsPullData}
                   savedData={hpSavedData}
                   handleSave={handleSave}
-                />
+                /> */}
                 <SkillTree
                   treeId="web"
                   handleNodeSelect={handleNodeSelect}
                   title="Programming Tree"
-                  data={webDevData}
+                  data={createSkills(tree)}
                   handleSave={handleSave}
                 />
                 <DisabledSkillTree

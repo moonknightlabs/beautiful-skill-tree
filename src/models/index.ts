@@ -50,12 +50,23 @@ interface BaseSkill {
   title: string;
   tooltip: Tooltip;
   children: Skill[];
+  levels: SkillLevel[];
 }
-
 interface MajorSkill extends BaseSkill {
   icon: string;
+  learned: number;
+  parentId: number;
+  requiredLevel: string;
 }
 
+export interface SkillLevel {
+  id: string;
+  skillId: string;
+  lvl: string;
+  description: string;
+  manaCost: string;
+  isLearned: boolean;
+}
 export type Direction = 'left' | 'right';
 
 export interface ContextStorage {
@@ -66,4 +77,5 @@ export interface ContextStorage {
 export interface NodeSelectEvent {
   key: string;
   state: NodeState;
+  skill: Skill;
 }
