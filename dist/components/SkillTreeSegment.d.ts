@@ -4,7 +4,7 @@ declare type Props = {
   parentPosition: number;
   parentHasMultipleChildren: boolean;
   shouldBeUnlocked: boolean;
-  currentLevel: string;
+  currentLevel: string | number | number;
 } & typeof SkillTreeSegment.defaultProps;
 declare function SkillTreeSegment({
   skill,

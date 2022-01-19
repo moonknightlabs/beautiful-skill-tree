@@ -79585,9 +79585,8 @@ object-assign
 
             if (nodeState === UNLOCKED_STATE) {
               if (learned < skill.levels.length) {
-                setLearned(learned + 1);
                 console.log(learned);
-                console.log(skill.levels.length - 1);
+                setLearned(learned + 1);
 
                 if (learned < skill.levels.length - 1) {
                   handleNodeSelect(id, UNLOCKED_STATE, skill);
@@ -79596,10 +79595,11 @@ object-assign
 
                 return;
               }
-            }
+            } // return;
 
-            return; // handleNodeSelect(id, UNLOCKED_STATE, skill);
-            // return updateSkillState(id, UNLOCKED_STATE, optional);
+            setLearned(skill.learned);
+            handleNodeSelect(id, UNLOCKED_STATE, skill);
+            return updateSkillState(id, UNLOCKED_STATE, optional);
           }
 
           React.useEffect(function() {
@@ -82614,7 +82614,7 @@ object-assign
                       title: 'Programming Tree',
                       data: mockData_1.createSkills(mockData_1.tree),
                       handleSave: handleSave,
-                      currentLevel: '0',
+                      currentLevel: 0,
                     }),
                     React.createElement(DisabledSkillTree_1.default, {
                       handleNodeSelect: handleNodeSelect,
@@ -82676,7 +82676,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '54188' + '/'
+            protocol + '://' + hostname + ':' + '57629' + '/'
           );
 
           ws.onmessage = function(event) {

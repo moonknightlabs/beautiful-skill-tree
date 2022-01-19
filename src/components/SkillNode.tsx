@@ -10,7 +10,7 @@ import Node from './ui/Node';
 interface Props {
   skill: Skill;
   nodeState: NodeState;
-  currentLevel: string;
+  currentLevel: number | string;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
   handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
@@ -68,9 +68,10 @@ function SkillNode({
         return;
       }
     }
-    return;
-    // handleNodeSelect(id, UNLOCKED_STATE, skill);
-    // return updateSkillState(id, UNLOCKED_STATE, optional);
+    // return;
+    setLearned(skill.learned);
+    handleNodeSelect(id, UNLOCKED_STATE, skill);
+    return updateSkillState(id, UNLOCKED_STATE, optional);
   }
 
   React.useEffect(() => {

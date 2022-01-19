@@ -25,7 +25,7 @@ export interface Props {
   closedByDefault?: boolean;
   savedData?: SavedDataType;
   disabled?: boolean;
-  currentLevel: string;
+  currentLevel: string | number;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,

@@ -3,7 +3,7 @@ import { Skill, NodeState } from '../models';
 interface Props {
   skill: Skill;
   nodeState: NodeState;
-  currentLevel: string;
+  currentLevel: number | string;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
   handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;

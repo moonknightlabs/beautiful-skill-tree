@@ -1097,8 +1097,6 @@ function SkillNode(_ref) {
     if (nodeState === UNLOCKED_STATE) {
       if (learned < skill.levels.length) {
         setLearned(learned + 1);
-        console.log(learned);
-        console.log(skill.levels.length - 1);
 
         if (learned < skill.levels.length - 1) {
           handleNodeSelect(id, UNLOCKED_STATE, skill);
@@ -1107,10 +1105,11 @@ function SkillNode(_ref) {
 
         return;
       }
-    }
+    } // return;
 
-    return; // handleNodeSelect(id, UNLOCKED_STATE, skill);
-    // return updateSkillState(id, UNLOCKED_STATE, optional);
+    setLearned(skill.learned);
+    handleNodeSelect(id, UNLOCKED_STATE, skill);
+    return updateSkillState(id, UNLOCKED_STATE, optional);
   }
 
   useEffect(function() {
