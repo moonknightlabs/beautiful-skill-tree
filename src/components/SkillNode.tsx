@@ -11,6 +11,8 @@ interface Props {
   skill: Skill;
   nodeState: NodeState;
   currentLevel: number | string;
+  learned: number;
+  handleLearnedChange: (newValue: number) => void;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
   handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
@@ -25,6 +27,8 @@ function SkillNode({
   skill,
   nodeState,
   currentLevel,
+  learned,
+  handleLearnedChange,
   incSkillCount,
   // decSkillCount,
   updateSkillState,
@@ -32,7 +36,7 @@ function SkillNode({
 }: Props) {
   const { children, title, tooltip, id, optional } = skill;
   const [parentPosition, setParentPosition] = React.useState(0);
-  const [learned, setLearned] = React.useState(skill.learned);
+  // const [learned, handleLearnedChange] = React.useState(skill.learned);
   const skillNodeRef: React.RefObject<HTMLDivElement> = React.useRef(null);
   const childWidth: React.MutableRefObject<number> = React.useRef(0);
 
@@ -55,12 +59,12 @@ function SkillNode({
 
   function handleClick() {
     if (nodeState === LOCKED_STATE) {
+      handleLearnedChange(0);
       return null;
     }
-
     if (nodeState === UNLOCKED_STATE) {
       if (learned < skill.levels.length) {
-        setLearned(learned + 1);
+        handleLearnedChange(learned + 1);
         if (learned < skill.levels.length - 1) {
           handleNodeSelect(id, UNLOCKED_STATE, skill);
           return updateSkillState(id, UNLOCKED_STATE, optional);
@@ -68,10 +72,32 @@ function SkillNode({
         return;
       }
     }
-    // return;
-    setLearned(skill.learned);
-    handleNodeSelect(id, UNLOCKED_STATE, skill);
-    return updateSkillState(id, UNLOCKED_STATE, optional);
+    return;
+  }
+
+  function handleRightClick() {
+    if (nodeState === LOCKED_STATE) {
+      handleLearnedChange(0);
+      return null;
+    }
+
+    if (nodeState === UNLOCKED_STATE) {
+      if (learned > 0) {
+        handleLearnedChange(learned - 1);
+        if (learned === 0) {
+          handleNodeSelect(id, LOCKED_STATE, skill);
+          return updateSkillState(id, LOCKED_STATE, optional);
+        }
+        handleNodeSelect(id, UNLOCKED_STATE, skill);
+        return updateSkillState(id, UNLOCKED_STATE, optional);
+      }
+    }
+    if (nodeState === SELECTED_STATE) {
+      handleLearnedChange(learned - 1);
+      handleNodeSelect(id, UNLOCKED_STATE, skill);
+      return updateSkillState(id, UNLOCKED_STATE, optional);
+    }
+    return;
   }
 
   React.useEffect(() => {
@@ -94,6 +120,7 @@ function SkillNode({
       return updateSkillState(id, SELECTED_STATE, optional);
     }
   }, [learned]);
+
   const hasMultipleChildren = children.length > 1;
 
   return (
@@ -102,8 +129,10 @@ function SkillNode({
         <Tooltip title={title} tooltip={tooltip}>
           <Node
             handleClick={handleClick}
+            handleRightClick={handleRightClick}
             id={id}
             currentState={nodeState}
+            learned={learned}
             skill={skill}
             ref={skillNodeRef}
           />

@@ -4,6 +4,8 @@ interface Props {
   skill: Skill;
   nodeState: NodeState;
   currentLevel: number | string;
+  learned: number;
+  handleLearnedChange: (newValue: number) => void;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
   handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
@@ -17,6 +19,8 @@ declare function SkillNode({
   skill,
   nodeState,
   currentLevel,
+  learned,
+  handleLearnedChange,
   incSkillCount,
   updateSkillState,
   handleNodeSelect,

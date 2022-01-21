@@ -12,9 +12,11 @@ const css: BaseThemedCssFunction<SkillThemeType> = require('styled-components')
 
 interface Props {
   handleClick: VoidFunction;
+  handleRightClick: VoidFunction;
   id: string;
   currentState: string;
   skill: Skill;
+  learned: number;
 }
 
 interface StyledNodeProps {
@@ -34,7 +36,14 @@ const Node = React.forwardRef(function Node(
   props: Props,
   ref: React.Ref<HTMLDivElement>
 ) {
-  const { handleClick, id, currentState, skill } = props;
+  const {
+    handleClick,
+    handleRightClick,
+    id,
+    currentState,
+    skill,
+    learned,
+  } = props;
   // console.log('Skill', skill);
   const { color = 'default' } = skill;
   const [isIOS, setIsIOS] = React.useState(false);
@@ -52,9 +61,20 @@ const Node = React.forwardRef(function Node(
     setIsIOS(isIOSDevice());
   }, []);
 
+  const checkForClickType = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.button === 0) {
+      console.log('Left Click');
+      handleClick();
+    } else if (e.button === 2) {
+      console.log('Right Click');
+      handleRightClick();
+    }
+  };
   return (
     <StyledNode
-      onClick={handleClick}
+      onClick={checkForClickType}
+      onContextMenu={checkForClickType}
       onKeyDown={memoizedHandleKeyDown}
       ref={ref}
       tabIndex={0}
@@ -70,7 +90,8 @@ const Node = React.forwardRef(function Node(
         <IconNode>
           <Icon title="node-icon" src={skill.icon} containerWidth={64} />
           <LevelNode>
-            {skill.learned}/{skill.levels.length}
+            {/* {skill.learned}/{skill.levels.length} */}
+            {learned}/{skill.levels.length}
           </LevelNode>
         </IconNode>
       ) : (

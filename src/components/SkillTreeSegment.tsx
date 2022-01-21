@@ -35,7 +35,7 @@ function SkillTreeSegment({
   const skillNodeRef: React.MutableRefObject<Nullable<HTMLDivElement>> = useRef(
     null
   );
-
+  const [learned, setLearned] = React.useState(skill.learned);
   const nodeState = skills[skill.id] ? skills[skill.id].nodeState : 'locked';
 
   useEffect(() => {
@@ -47,6 +47,7 @@ function SkillTreeSegment({
     }
 
     if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
+      setLearned(0);
       return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
     }
 
@@ -69,6 +70,9 @@ function SkillTreeSegment({
     return;
   }, [mounting]);
 
+  const handleLearnedChange = (newValue: number) => {
+    setLearned(newValue);
+  };
   return (
     <div
       style={{
@@ -90,6 +94,8 @@ function SkillTreeSegment({
           updateSkillState={updateSkillState}
           currentLevel={currentLevel}
           skill={skill}
+          learned={learned}
+          handleLearnedChange={handleLearnedChange}
           nodeState={nodeState}
           handleNodeSelect={handleNodeSelect}
         />

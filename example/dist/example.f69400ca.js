@@ -79276,9 +79276,11 @@ object-assign
           /*#__PURE__*/
           React.forwardRef(function Node(props, ref) {
             var handleClick = props.handleClick,
+              handleRightClick = props.handleRightClick,
               id = props.id,
               currentState = props.currentState,
-              skill = props.skill; // console.log('Skill', skill);
+              skill = props.skill,
+              learned = props.learned; // console.log('Skill', skill);
 
             var _skill$color = skill.color,
               color = _skill$color === void 0 ? 'default' : _skill$color;
@@ -79298,10 +79300,24 @@ object-assign
             React.useEffect(function() {
               setIsIOS(isIOSDevice());
             }, []);
+
+            var checkForClickType = function checkForClickType(e) {
+              e.preventDefault();
+
+              if (e.button === 0) {
+                console.log('Left Click');
+                handleClick();
+              } else if (e.button === 2) {
+                console.log('Right Click');
+                handleRightClick();
+              }
+            };
+
             return React.createElement(
               StyledNode,
               {
-                onClick: handleClick,
+                onClick: checkForClickType,
+                onContextMenu: checkForClickType,
                 onKeyDown: memoizedHandleKeyDown,
                 ref: ref,
                 tabIndex: 0,
@@ -79325,7 +79341,7 @@ object-assign
                     React.createElement(
                       LevelNode,
                       null,
-                      skill.learned,
+                      learned,
                       '/',
                       skill.levels.length
                     )
@@ -79534,6 +79550,8 @@ object-assign
           var skill = _ref.skill,
             nodeState = _ref.nodeState,
             currentLevel = _ref.currentLevel,
+            learned = _ref.learned,
+            handleLearnedChange = _ref.handleLearnedChange,
             incSkillCount = _ref.incSkillCount,
             updateSkillState = _ref.updateSkillState,
             _ref$handleNodeSelect = _ref.handleNodeSelect,
@@ -79551,11 +79569,7 @@ object-assign
 
           var _React$useState = React.useState(0),
             parentPosition = _React$useState[0],
-            setParentPosition = _React$useState[1];
-
-          var _React$useState2 = React.useState(skill.learned),
-            learned = _React$useState2[0],
-            setLearned = _React$useState2[1];
+            setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
 
           var skillNodeRef = React.useRef(null);
           var childWidth = React.useRef(0);
@@ -79580,13 +79594,13 @@ object-assign
 
           function handleClick() {
             if (nodeState === LOCKED_STATE) {
+              handleLearnedChange(0);
               return null;
             }
 
             if (nodeState === UNLOCKED_STATE) {
               if (learned < skill.levels.length) {
-                console.log(learned);
-                setLearned(learned + 1);
+                handleLearnedChange(learned + 1);
 
                 if (learned < skill.levels.length - 1) {
                   handleNodeSelect(id, UNLOCKED_STATE, skill);
@@ -79595,11 +79609,38 @@ object-assign
 
                 return;
               }
-            } // return;
+            }
 
-            setLearned(skill.learned);
-            handleNodeSelect(id, UNLOCKED_STATE, skill);
-            return updateSkillState(id, UNLOCKED_STATE, optional);
+            return;
+          }
+
+          function handleRightClick() {
+            if (nodeState === LOCKED_STATE) {
+              handleLearnedChange(0);
+              return null;
+            }
+
+            if (nodeState === UNLOCKED_STATE) {
+              if (learned > 0) {
+                handleLearnedChange(learned - 1);
+
+                if (learned === 0) {
+                  handleNodeSelect(id, LOCKED_STATE, skill);
+                  return updateSkillState(id, LOCKED_STATE, optional);
+                }
+
+                handleNodeSelect(id, UNLOCKED_STATE, skill);
+                return updateSkillState(id, UNLOCKED_STATE, optional);
+              }
+            }
+
+            if (nodeState === SELECTED_STATE) {
+              handleLearnedChange(learned - 1);
+              handleNodeSelect(id, UNLOCKED_STATE, skill);
+              return updateSkillState(id, UNLOCKED_STATE, optional);
+            }
+
+            return;
           }
 
           React.useEffect(function() {
@@ -79636,8 +79677,10 @@ object-assign
                 },
                 React.createElement(Node, {
                   handleClick: handleClick,
+                  handleRightClick: handleRightClick,
                   id: id,
                   currentState: nodeState,
+                  learned: learned,
                   skill: skill,
                   ref: skillNodeRef,
                 })
@@ -80402,6 +80445,11 @@ object-assign
             handleNodeSelect = _useContext.handleNodeSelect;
 
           var skillNodeRef = React.useRef(null);
+
+          var _React$useState = React__default.useState(skill.learned),
+            learned = _React$useState[0],
+            setLearned = _React$useState[1];
+
           var nodeState = skills[skill.id]
             ? skills[skill.id].nodeState
             : 'locked';
@@ -80415,6 +80463,7 @@ object-assign
               }
 
               if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
+                setLearned(0);
                 return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
               }
 
@@ -80444,6 +80493,11 @@ object-assign
             },
             [mounting]
           );
+
+          var handleLearnedChange = function handleLearnedChange(newValue) {
+            setLearned(newValue);
+          };
+
           return React__default.createElement(
             'div',
             {
@@ -80469,6 +80523,8 @@ object-assign
                 updateSkillState: updateSkillState,
                 currentLevel: currentLevel,
                 skill: skill,
+                learned: learned,
+                handleLearnedChange: handleLearnedChange,
                 nodeState: nodeState,
                 handleNodeSelect: handleNodeSelect,
               })
@@ -82676,7 +82732,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '57629' + '/'
+            protocol + '://' + hostname + ':' + '58573' + '/'
           );
 
           ws.onmessage = function(event) {

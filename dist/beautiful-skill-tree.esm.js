@@ -787,9 +787,11 @@ var Node =
   /*#__PURE__*/
   forwardRef(function Node(props, ref) {
     var handleClick = props.handleClick,
+      handleRightClick = props.handleRightClick,
       id = props.id,
       currentState = props.currentState,
-      skill = props.skill; // console.log('Skill', skill);
+      skill = props.skill,
+      learned = props.learned; // console.log('Skill', skill);
 
     var _skill$color = skill.color,
       color = _skill$color === void 0 ? 'default' : _skill$color;
@@ -809,10 +811,24 @@ var Node =
     useEffect(function() {
       setIsIOS(isIOSDevice());
     }, []);
+
+    var checkForClickType = function checkForClickType(e) {
+      e.preventDefault();
+
+      if (e.button === 0) {
+        console.log('Left Click');
+        handleClick();
+      } else if (e.button === 2) {
+        console.log('Right Click');
+        handleRightClick();
+      }
+    };
+
     return createElement(
       StyledNode,
       {
-        onClick: handleClick,
+        onClick: checkForClickType,
+        onContextMenu: checkForClickType,
         onKeyDown: memoizedHandleKeyDown,
         ref: ref,
         tabIndex: 0,
@@ -833,13 +849,7 @@ var Node =
               src: skill.icon,
               containerWidth: 64,
             }),
-            createElement(
-              LevelNode,
-              null,
-              skill.learned,
-              '/',
-              skill.levels.length
-            )
+            createElement(LevelNode, null, learned, '/', skill.levels.length)
           )
         : createElement(
             TextNode,
@@ -1045,6 +1055,8 @@ function SkillNode(_ref) {
   var skill = _ref.skill,
     nodeState = _ref.nodeState,
     currentLevel = _ref.currentLevel,
+    learned = _ref.learned,
+    handleLearnedChange = _ref.handleLearnedChange,
     incSkillCount = _ref.incSkillCount,
     updateSkillState = _ref.updateSkillState,
     _ref$handleNodeSelect = _ref.handleNodeSelect,
@@ -1062,11 +1074,7 @@ function SkillNode(_ref) {
 
   var _React$useState = useState(0),
     parentPosition = _React$useState[0],
-    setParentPosition = _React$useState[1];
-
-  var _React$useState2 = useState(skill.learned),
-    learned = _React$useState2[0],
-    setLearned = _React$useState2[1];
+    setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
 
   var skillNodeRef = useRef(null);
   var childWidth = useRef(0);
@@ -1091,12 +1099,13 @@ function SkillNode(_ref) {
 
   function handleClick() {
     if (nodeState === LOCKED_STATE) {
+      handleLearnedChange(0);
       return null;
     }
 
     if (nodeState === UNLOCKED_STATE) {
       if (learned < skill.levels.length) {
-        setLearned(learned + 1);
+        handleLearnedChange(learned + 1);
 
         if (learned < skill.levels.length - 1) {
           handleNodeSelect(id, UNLOCKED_STATE, skill);
@@ -1105,11 +1114,38 @@ function SkillNode(_ref) {
 
         return;
       }
-    } // return;
+    }
 
-    setLearned(skill.learned);
-    handleNodeSelect(id, UNLOCKED_STATE, skill);
-    return updateSkillState(id, UNLOCKED_STATE, optional);
+    return;
+  }
+
+  function handleRightClick() {
+    if (nodeState === LOCKED_STATE) {
+      handleLearnedChange(0);
+      return null;
+    }
+
+    if (nodeState === UNLOCKED_STATE) {
+      if (learned > 0) {
+        handleLearnedChange(learned - 1);
+
+        if (learned === 0) {
+          handleNodeSelect(id, LOCKED_STATE, skill);
+          return updateSkillState(id, LOCKED_STATE, optional);
+        }
+
+        handleNodeSelect(id, UNLOCKED_STATE, skill);
+        return updateSkillState(id, UNLOCKED_STATE, optional);
+      }
+    }
+
+    if (nodeState === SELECTED_STATE) {
+      handleLearnedChange(learned - 1);
+      handleNodeSelect(id, UNLOCKED_STATE, skill);
+      return updateSkillState(id, UNLOCKED_STATE, optional);
+    }
+
+    return;
   }
 
   useEffect(function() {
@@ -1146,8 +1182,10 @@ function SkillNode(_ref) {
         },
         createElement(Node, {
           handleClick: handleClick,
+          handleRightClick: handleRightClick,
           id: id,
           currentState: nodeState,
+          learned: learned,
           skill: skill,
           ref: skillNodeRef,
         })
@@ -1896,6 +1934,11 @@ function SkillTreeSegment(_ref) {
     handleNodeSelect = _useContext.handleNodeSelect;
 
   var skillNodeRef = useRef(null);
+
+  var _React$useState = React__default.useState(skill.learned),
+    learned = _React$useState[0],
+    setLearned = _React$useState[1];
+
   var nodeState = skills[skill.id] ? skills[skill.id].nodeState : 'locked';
   useEffect(
     function() {
@@ -1907,6 +1950,7 @@ function SkillTreeSegment(_ref) {
       }
 
       if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
+        setLearned(0);
         return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
       }
 
@@ -1932,6 +1976,11 @@ function SkillTreeSegment(_ref) {
     },
     [mounting]
   );
+
+  var handleLearnedChange = function handleLearnedChange(newValue) {
+    setLearned(newValue);
+  };
+
   return React__default.createElement(
     'div',
     {
@@ -1957,6 +2006,8 @@ function SkillTreeSegment(_ref) {
         updateSkillState: updateSkillState,
         currentLevel: currentLevel,
         skill: skill,
+        learned: learned,
+        handleLearnedChange: handleLearnedChange,
         nodeState: nodeState,
         handleNodeSelect: handleNodeSelect,
       })
