@@ -1110,7 +1110,7 @@ function SkillNode(_ref) {
         handleLearnedChange(learned + 1);
 
         if (learned < skill.levels.length - 1) {
-          handleNodeSelect(id, UNLOCKED_STATE, skill);
+          handleNodeSelect(id, UNLOCKED_STATE, skill, learned + 1);
           return updateSkillState(id, UNLOCKED_STATE, optional);
         }
 
@@ -1132,18 +1132,18 @@ function SkillNode(_ref) {
         handleLearnedChange(learned - 1);
 
         if (learned === 0) {
-          handleNodeSelect(id, LOCKED_STATE, skill);
+          handleNodeSelect(id, LOCKED_STATE, skill, learned - 1);
           return updateSkillState(id, LOCKED_STATE, optional);
         }
 
-        handleNodeSelect(id, UNLOCKED_STATE, skill);
+        handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
         return updateSkillState(id, UNLOCKED_STATE, optional);
       }
     }
 
     if (nodeState === SELECTED_STATE) {
       handleLearnedChange(learned - 1);
-      handleNodeSelect(id, UNLOCKED_STATE, skill);
+      handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, optional);
     }
 
@@ -1163,7 +1163,7 @@ function SkillNode(_ref) {
     function() {
       if (learned === skill.levels.length) {
         incSkillCount(optional);
-        handleNodeSelect(id, SELECTED_STATE, skill);
+        handleNodeSelect(id, SELECTED_STATE, skill, learned);
         return updateSkillState(id, SELECTED_STATE, optional);
       }
     },
@@ -1801,11 +1801,12 @@ var SkillTreeProvider =
         });
       };
 
-      _this.handleNodeSelect = function(key, state, skill) {
+      _this.handleNodeSelect = function(key, state, skill, learned) {
         return _this.props.sendNodeSelectDataToClient({
           key: key,
           state: state,
           skill: skill,
+          learned: learned,
         });
       };
 

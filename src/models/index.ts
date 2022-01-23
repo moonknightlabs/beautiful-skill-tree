@@ -54,6 +54,7 @@ interface BaseSkill {
   learned: number;
   parentId: number;
   requiredLevel: string;
+  job: string;
 }
 interface MajorSkill extends BaseSkill {
   icon: string;
@@ -78,4 +79,5 @@ export interface NodeSelectEvent {
   key: string;
   state: NodeState;
   skill: Skill;
+  learned: number;
 }

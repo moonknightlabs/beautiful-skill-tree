@@ -15,7 +15,12 @@ interface Props {
   handleLearnedChange: (newValue: number) => void;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
-  handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
+  handleNodeSelect?: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    lerned: number
+  ) => void;
   updateSkillState: (
     key: string,
     updatedState: NodeState,
@@ -66,7 +71,7 @@ function SkillNode({
       if (learned < skill.levels.length) {
         handleLearnedChange(learned + 1);
         if (learned < skill.levels.length - 1) {
-          handleNodeSelect(id, UNLOCKED_STATE, skill);
+          handleNodeSelect(id, UNLOCKED_STATE, skill, learned + 1);
           return updateSkillState(id, UNLOCKED_STATE, optional);
         }
         return;
@@ -85,16 +90,16 @@ function SkillNode({
       if (learned > 0) {
         handleLearnedChange(learned - 1);
         if (learned === 0) {
-          handleNodeSelect(id, LOCKED_STATE, skill);
+          handleNodeSelect(id, LOCKED_STATE, skill, learned - 1);
           return updateSkillState(id, LOCKED_STATE, optional);
         }
-        handleNodeSelect(id, UNLOCKED_STATE, skill);
+        handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
         return updateSkillState(id, UNLOCKED_STATE, optional);
       }
     }
     if (nodeState === SELECTED_STATE) {
       handleLearnedChange(learned - 1);
-      handleNodeSelect(id, UNLOCKED_STATE, skill);
+      handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, optional);
     }
     return;
@@ -116,7 +121,7 @@ function SkillNode({
   React.useEffect(() => {
     if (learned === skill.levels.length) {
       incSkillCount(optional);
-      handleNodeSelect(id, SELECTED_STATE, skill);
+      handleNodeSelect(id, SELECTED_STATE, skill, learned);
       return updateSkillState(id, SELECTED_STATE, optional);
     }
   }, [learned]);

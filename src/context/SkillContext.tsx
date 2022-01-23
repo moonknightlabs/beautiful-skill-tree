@@ -46,7 +46,12 @@ export interface ISkillContext {
     optional?: boolean
   ) => void;
   setSkillCount: (skillCount: number) => void;
-  handleNodeSelect: (key: string, state: NodeState, skill: Skill) => void;
+  handleNodeSelect: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    learned: number
+  ) => void;
   incrementSelectedCount: VoidFunction;
   decrementSelectedCount: VoidFunction;
 }
@@ -196,8 +201,18 @@ export class SkillTreeProvider extends React.Component<Props, State> {
     });
   };
 
-  handleNodeSelect = (key: string, state: NodeState, skill: Skill) => {
-    return this.props.sendNodeSelectDataToClient({ key, state, skill });
+  handleNodeSelect = (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    learned: number
+  ) => {
+    return this.props.sendNodeSelectDataToClient({
+      key,
+      state,
+      skill,
+      learned,
+    });
   };
 
   updateSkillState = (

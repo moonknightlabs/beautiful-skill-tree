@@ -8,7 +8,12 @@ interface Props {
   handleLearnedChange: (newValue: number) => void;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
-  handleNodeSelect?: (key: string, state: NodeState, skill: Skill) => void;
+  handleNodeSelect?: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    lerned: number
+  ) => void;
   updateSkillState: (
     key: string,
     updatedState: NodeState,
