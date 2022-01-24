@@ -21,6 +21,12 @@ interface Props {
     skill: Skill,
     lerned: number
   ) => void;
+  handleNodeRemove?: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    lerned: number
+  ) => void;
   updateSkillState: (
     key: string,
     updatedState: NodeState,
@@ -38,6 +44,7 @@ function SkillNode({
   // decSkillCount,
   updateSkillState,
   handleNodeSelect = () => null,
+  handleNodeRemove = () => null,
 }: Props) {
   const { children, title, tooltip, id, optional } = skill;
   const [parentPosition, setParentPosition] = React.useState(0);
@@ -90,16 +97,16 @@ function SkillNode({
       if (learned > 0) {
         handleLearnedChange(learned - 1);
         if (learned === 0) {
-          handleNodeSelect(id, LOCKED_STATE, skill, learned - 1);
+          handleNodeRemove(id, LOCKED_STATE, skill, learned - 1);
           return updateSkillState(id, LOCKED_STATE, optional);
         }
-        handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
+        handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
         return updateSkillState(id, UNLOCKED_STATE, optional);
       }
     }
     if (nodeState === SELECTED_STATE) {
       handleLearnedChange(learned - 1);
-      handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
+      handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, optional);
     }
     return;

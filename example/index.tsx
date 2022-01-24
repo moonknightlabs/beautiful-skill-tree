@@ -39,6 +39,14 @@ function handleSave(
 }
 
 function handleNodeSelect(e: NodeSelectEvent) {
+  console.log('Increment');
+  console.log(e);
+  // console.log('selected node - ', e.key);
+  // console.log('new state - ', e.state);
+}
+
+function handleNodeRemove(e: NodeSelectEvent) {
+  console.log('Decrement');
   console.log(e);
   // console.log('selected node - ', e.key);
   // console.log('new state - ', e.state);
@@ -129,6 +137,7 @@ const App = () => {
                 <SkillTree
                   treeId="web"
                   handleNodeSelect={handleNodeSelect}
+                  handleNodeRemove={handleNodeRemove}
                   title="Programming Tree"
                   data={createSkills(tree)}
                   handleSave={handleSave}

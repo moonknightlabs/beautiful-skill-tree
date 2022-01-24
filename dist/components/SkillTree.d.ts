@@ -21,6 +21,7 @@ export interface Props {
     skills: SavedDataType
   ) => void;
   handleNodeSelect?: (e: NodeSelectEvent) => void;
+  handleNodeRemove?: (e: NodeSelectEvent) => void;
 }
 declare function SkillTree({
   data,
@@ -32,6 +33,7 @@ declare function SkillTree({
   savedData,
   handleSave,
   handleNodeSelect,
+  handleNodeRemove,
   collapsible,
   disabled,
 }: Props): JSX.Element;

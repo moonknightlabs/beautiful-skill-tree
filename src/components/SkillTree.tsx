@@ -32,6 +32,7 @@ export interface Props {
     skills: SavedDataType
   ) => void;
   handleNodeSelect?: (e: NodeSelectEvent) => void;
+  handleNodeRemove?: (e: NodeSelectEvent) => void;
 }
 
 interface CollapsibleContainerProps {
@@ -48,6 +49,7 @@ function SkillTree({
   savedData,
   handleSave,
   handleNodeSelect,
+  handleNodeRemove,
   collapsible = false,
   disabled = false,
 }: Props) {
@@ -84,6 +86,7 @@ function SkillTree({
         savedData={savedData}
         handleSave={handleSave}
         sendNodeSelectDataToClient={handleNodeSelect}
+        sendNodeRemoveDataToClient={handleNodeRemove}
       >
         <CalculateNodeCount data={data} />
         <SkillTreeContainer>

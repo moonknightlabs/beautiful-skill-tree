@@ -64,10 +64,8 @@ const Node = React.forwardRef(function Node(
   const checkForClickType = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (e.button === 0) {
-      console.log('Left Click');
       handleClick();
     } else if (e.button === 2) {
-      console.log('Right Click');
       handleRightClick();
     }
   };

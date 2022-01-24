@@ -25,6 +25,7 @@ type DefaultProps = {
     skills: SavedDataType
   ) => void;
   sendNodeSelectDataToClient: (e: NodeSelectEvent) => void;
+  sendNodeRemoveDataToClient: (e: NodeSelectEvent) => void;
 };
 
 interface State {
@@ -52,6 +53,12 @@ export interface ISkillContext {
     skill: Skill,
     learned: number
   ) => void;
+  handleNodeRemove: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    learned: number
+  ) => void;
   incrementSelectedCount: VoidFunction;
   decrementSelectedCount: VoidFunction;
 }
@@ -64,6 +71,7 @@ const SkillContext = React.createContext<ISkillContext>({
   updateSkillState: () => undefined,
   setSkillCount: () => undefined,
   handleNodeSelect: () => undefined,
+  handleNodeRemove: () => undefined,
   incrementSelectedCount: () => undefined,
   decrementSelectedCount: () => undefined,
 });
@@ -75,6 +83,9 @@ export class SkillTreeProvider extends React.Component<Props, State> {
       return storage.setItem(`skills-${treeId}`, JSON.stringify(skills));
     },
     sendNodeSelectDataToClient() {
+      return null;
+    },
+    sendNodeRemoveDataToClient() {
       return null;
     },
   };
@@ -215,6 +226,20 @@ export class SkillTreeProvider extends React.Component<Props, State> {
     });
   };
 
+  handleNodeRemove = (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    learned: number
+  ) => {
+    return this.props.sendNodeRemoveDataToClient({
+      key,
+      state,
+      skill,
+      learned,
+    });
+  };
+
   updateSkillState = (
     key: string,
     updatedState: NodeState,
@@ -250,6 +275,7 @@ export class SkillTreeProvider extends React.Component<Props, State> {
           updateSkillState: this.updateSkillState,
           setSkillCount: this.setSkillCount,
           handleNodeSelect: this.handleNodeSelect,
+          handleNodeRemove: this.handleNodeRemove,
           incrementSelectedCount: this.incrementSelectedCount,
           decrementSelectedCount: this.decrementSelectedCount,
         }}

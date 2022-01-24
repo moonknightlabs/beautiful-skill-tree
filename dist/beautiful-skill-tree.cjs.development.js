@@ -812,10 +812,8 @@ var Node =
       e.preventDefault();
 
       if (e.button === 0) {
-        console.log('Left Click');
         handleClick();
       } else if (e.button === 2) {
-        console.log('Right Click');
         handleRightClick();
       }
     };
@@ -1067,7 +1065,14 @@ function SkillNode(_ref) {
         ? function() {
             return null;
           }
-        : _ref$handleNodeSelect;
+        : _ref$handleNodeSelect,
+    _ref$handleNodeRemove = _ref.handleNodeRemove,
+    handleNodeRemove =
+      _ref$handleNodeRemove === void 0
+        ? function() {
+            return null;
+          }
+        : _ref$handleNodeRemove;
   var children = skill.children,
     title = skill.title,
     tooltip = skill.tooltip,
@@ -1132,18 +1137,18 @@ function SkillNode(_ref) {
         handleLearnedChange(learned - 1);
 
         if (learned === 0) {
-          handleNodeSelect(id, LOCKED_STATE, skill, learned - 1);
+          handleNodeRemove(id, LOCKED_STATE, skill, learned - 1);
           return updateSkillState(id, LOCKED_STATE, optional);
         }
 
-        handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
+        handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
         return updateSkillState(id, UNLOCKED_STATE, optional);
       }
     }
 
     if (nodeState === SELECTED_STATE) {
       handleLearnedChange(learned - 1);
-      handleNodeSelect(id, UNLOCKED_STATE, skill, learned - 1);
+      handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, optional);
     }
 
@@ -1705,6 +1710,9 @@ var SkillContext =
     handleNodeSelect: function handleNodeSelect() {
       return undefined;
     },
+    handleNodeRemove: function handleNodeRemove() {
+      return undefined;
+    },
     incrementSelectedCount: function incrementSelectedCount() {
       return undefined;
     },
@@ -1810,6 +1818,15 @@ var SkillTreeProvider =
         });
       };
 
+      _this.handleNodeRemove = function(key, state, skill, learned) {
+        return _this.props.sendNodeRemoveDataToClient({
+          key: key,
+          state: state,
+          skill: skill,
+          learned: learned,
+        });
+      };
+
       _this.updateSkillState = function(key, updatedState, optional) {
         if (optional === void 0) {
           optional = false;
@@ -1900,6 +1917,7 @@ var SkillTreeProvider =
             updateSkillState: this.updateSkillState,
             setSkillCount: this.setSkillCount,
             handleNodeSelect: this.handleNodeSelect,
+            handleNodeRemove: this.handleNodeRemove,
             incrementSelectedCount: this.incrementSelectedCount,
             decrementSelectedCount: this.decrementSelectedCount,
           },
@@ -1918,6 +1936,9 @@ SkillTreeProvider.defaultProps = {
   sendNodeSelectDataToClient: function sendNodeSelectDataToClient() {
     return null;
   },
+  sendNodeRemoveDataToClient: function sendNodeRemoveDataToClient() {
+    return null;
+  },
 };
 
 function SkillTreeSegment(_ref) {
@@ -1934,7 +1955,8 @@ function SkillTreeSegment(_ref) {
     updateSkillState = _useContext.updateSkillState,
     decrementSelectedCount = _useContext.decrementSelectedCount,
     incrementSelectedCount = _useContext.incrementSelectedCount,
-    handleNodeSelect = _useContext.handleNodeSelect;
+    handleNodeSelect = _useContext.handleNodeSelect,
+    handleNodeRemove = _useContext.handleNodeRemove;
 
   var skillNodeRef = React.useRef(null);
 
@@ -2013,6 +2035,7 @@ function SkillTreeSegment(_ref) {
         handleLearnedChange: handleLearnedChange,
         nodeState: nodeState,
         handleNodeSelect: handleNodeSelect,
+        handleNodeRemove: handleNodeRemove,
       })
     )
   );
@@ -2566,6 +2589,7 @@ function SkillTree(_ref) {
     savedData = _ref.savedData,
     handleSave = _ref.handleSave,
     handleNodeSelect = _ref.handleNodeSelect,
+    handleNodeRemove = _ref.handleNodeRemove,
     _ref$collapsible = _ref.collapsible,
     collapsible = _ref$collapsible === void 0 ? false : _ref$collapsible,
     _ref$disabled = _ref.disabled,
@@ -2611,6 +2635,7 @@ function SkillTree(_ref) {
         savedData: savedData,
         handleSave: handleSave,
         sendNodeSelectDataToClient: handleNodeSelect,
+        sendNodeRemoveDataToClient: handleNodeRemove,
       },
       React__default.createElement(CalculateNodeCount, {
         data: data,

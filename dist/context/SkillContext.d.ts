@@ -20,6 +20,7 @@ declare type DefaultProps = {
     skills: SavedDataType
   ) => void;
   sendNodeSelectDataToClient: (e: NodeSelectEvent) => void;
+  sendNodeRemoveDataToClient: (e: NodeSelectEvent) => void;
 };
 interface State {
   skills: SavedDataType;
@@ -45,6 +46,12 @@ export interface ISkillContext {
     skill: Skill,
     learned: number
   ) => void;
+  handleNodeRemove: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    learned: number
+  ) => void;
   incrementSelectedCount: VoidFunction;
   decrementSelectedCount: VoidFunction;
 }
@@ -62,6 +69,12 @@ export declare class SkillTreeProvider extends React.Component<Props, State> {
   resetSkills: () => void;
   setSkillCount: (skillCount: number) => void;
   handleNodeSelect: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    learned: number
+  ) => void;
+  handleNodeRemove: (
     key: string,
     state: NodeState,
     skill: Skill,

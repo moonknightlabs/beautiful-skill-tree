@@ -14,6 +14,12 @@ interface Props {
     skill: Skill,
     lerned: number
   ) => void;
+  handleNodeRemove?: (
+    key: string,
+    state: NodeState,
+    skill: Skill,
+    lerned: number
+  ) => void;
   updateSkillState: (
     key: string,
     updatedState: NodeState,
@@ -29,6 +35,7 @@ declare function SkillNode({
   incSkillCount,
   updateSkillState,
   handleNodeSelect,
+  handleNodeRemove,
 }: Props): JSX.Element;
 declare const _default: React.MemoExoticComponent<typeof SkillNode>;
 export default _default;

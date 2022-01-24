@@ -30,6 +30,7 @@ function SkillTreeSegment({
     decrementSelectedCount,
     incrementSelectedCount,
     handleNodeSelect,
+    handleNodeRemove,
   } = useContext(SkillContext);
 
   const skillNodeRef: React.MutableRefObject<Nullable<HTMLDivElement>> = useRef(
@@ -98,6 +99,7 @@ function SkillTreeSegment({
           handleLearnedChange={handleLearnedChange}
           nodeState={nodeState}
           handleNodeSelect={handleNodeSelect}
+          handleNodeRemove={handleNodeRemove}
         />
       </div>
     </div>
