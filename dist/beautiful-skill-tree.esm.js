@@ -1974,12 +1974,14 @@ function SkillTreeSegment(_ref) {
       if (mounting) return;
 
       if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
+        console.log('Selected state');
         decrementSelectedCount();
         return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
       }
 
       if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
         setLearned(0);
+        console.log('Unlocked State');
         return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
       }
 
@@ -1988,10 +1990,11 @@ function SkillTreeSegment(_ref) {
       }
 
       if (nodeState === LOCKED_STATE && shouldBeUnlocked) {
+        console.log('LOcked state');
         return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
       }
     },
-    [nodeState, shouldBeUnlocked, mounting]
+    [nodeState, shouldBeUnlocked, mounting, skill.learned]
   );
   useEffect(
     function() {
