@@ -72,7 +72,7 @@ const Node = React.forwardRef(function Node(
   return (
     <StyledNode
       onClick={checkForClickType}
-      onContextMenu={checkForClickType}
+      // onContextMenu={checkForClickType}
       onKeyDown={memoizedHandleKeyDown}
       ref={ref}
       tabIndex={0}

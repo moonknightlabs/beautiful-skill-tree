@@ -826,7 +826,7 @@ var Node =
       StyledNode,
       {
         onClick: checkForClickType,
-        onContextMenu: checkForClickType,
+        // onContextMenu={checkForClickType}
         onKeyDown: memoizedHandleKeyDown,
         ref: ref,
         tabIndex: 0,
