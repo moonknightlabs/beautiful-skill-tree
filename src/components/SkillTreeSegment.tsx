@@ -40,6 +40,10 @@ function SkillTreeSegment({
   const nodeState = skills[skill.id] ? skills[skill.id].nodeState : 'locked';
 
   useEffect(() => {
+    setLearned(skill.learned);
+  }, [skill.learned]);
+
+  useEffect(() => {
     if (mounting) return;
 
     if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
