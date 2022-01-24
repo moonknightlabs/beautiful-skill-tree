@@ -1993,16 +1993,12 @@ function SkillTreeSegment(_ref) {
         return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
       }
 
-      if (
-        nodeState === SELECTED_STATE &&
-        shouldBeUnlocked &&
-        skill.learned === 0
-      ) {
+      if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
         console.log('State I created');
         return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
       }
     },
-    [nodeState, shouldBeUnlocked, mounting, skill.learned]
+    [nodeState, shouldBeUnlocked, mounting, learned]
   );
   React.useEffect(
     function() {
