@@ -64,7 +64,7 @@ export interface SkillLevel {
   id: string;
   skillId: string;
   lvl: string;
-  description: string;
+  parsedDescription: string;
   manaCost: string;
   isLearned: boolean;
 }
