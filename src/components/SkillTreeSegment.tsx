@@ -52,7 +52,7 @@ function SkillTreeSegment({
     }
 
     if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
-      setLearned(0);
+      // setLearned(0);
       return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
     }
 
