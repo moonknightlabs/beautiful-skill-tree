@@ -65,7 +65,6 @@ function SkillTreeSegment({
     }
 
     if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
-      console.log('State I created');
       return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
     }
   }, [nodeState, shouldBeUnlocked, mounting, learned]);

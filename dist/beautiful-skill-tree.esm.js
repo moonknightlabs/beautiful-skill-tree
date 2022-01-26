@@ -1992,7 +1992,6 @@ function SkillTreeSegment(_ref) {
       }
 
       if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
-        console.log('State I created');
         return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
       }
     },
@@ -2596,6 +2595,7 @@ function SkillTree(_ref) {
     currentLevel = _ref.currentLevel,
     treeId = _ref.treeId,
     savedData = _ref.savedData,
+    skillPoint = _ref.skillPoint,
     handleSave = _ref.handleSave,
     handleNodeSelect = _ref.handleNodeSelect,
     handleNodeRemove = _ref.handleNodeRemove,
@@ -2679,7 +2679,8 @@ function SkillTree(_ref) {
                   key: skill.id,
                 },
                 React__default.createElement(SkillTreeSegment, {
-                  shouldBeUnlocked: currentLevel >= skill.requiredLevel,
+                  shouldBeUnlocked:
+                    currentLevel >= skill.requiredLevel && skillPoint > 0,
                   currentLevel: currentLevel,
                   skill: skill,
                   hasParent: false,

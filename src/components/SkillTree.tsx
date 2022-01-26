@@ -26,6 +26,7 @@ export interface Props {
   savedData?: SavedDataType;
   disabled?: boolean;
   currentLevel: string | number;
+  skillPoint: string | number;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,
@@ -47,6 +48,7 @@ function SkillTree({
   currentLevel,
   treeId,
   savedData,
+  skillPoint,
   handleSave,
   handleNodeSelect,
   handleNodeRemove,
@@ -107,7 +109,9 @@ function SkillTree({
                 return (
                   <React.Fragment key={skill.id}>
                     <SkillTreeSegment
-                      shouldBeUnlocked={currentLevel >= skill.requiredLevel}
+                      shouldBeUnlocked={
+                        currentLevel >= skill.requiredLevel && skillPoint > 0
+                      }
                       currentLevel={currentLevel}
                       skill={skill}
                       hasParent={false}
