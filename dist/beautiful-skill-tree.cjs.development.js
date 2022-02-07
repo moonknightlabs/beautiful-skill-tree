@@ -662,7 +662,7 @@ function _templateObject9() {
 
 function _templateObject8() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  background-color: black;\n  position: absolute;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-size: 14px;\n  bottom: -10px;\n  right: -25px;\n  z-index: 99;\n\n  @media (max-width: 800px) {\n    font-size: 12px;\n    bottom: -15px;\n  }\n',
+    '\n  background-color: black;\n  position: absolute;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-size: 14px;\n  bottom: -10px;\n  right: -25px;\n  z-index: 99;\n\n  @media (max-width: 900px) {\n    font-size: 12px;\n    bottom: -15px;\n  }\n',
   ]);
 
   _templateObject8 = function _templateObject8() {

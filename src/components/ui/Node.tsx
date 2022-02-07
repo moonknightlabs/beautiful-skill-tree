@@ -257,7 +257,7 @@ const LevelNode = styled.div`
   right: -25px;
   z-index: 99;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     font-size: 12px;
     bottom: -15px;
   }
