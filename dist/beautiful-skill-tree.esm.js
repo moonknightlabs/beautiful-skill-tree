@@ -614,8 +614,18 @@ function isIOSDevice() {
   return false;
 }
 
-function _templateObject12() {
+function _templateObject13() {
   var data = _taggedTemplateLiteralLoose(['\n      color: ', ';\n    ']);
+
+  _templateObject13 = function _templateObject13() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject12() {
+  var data = _taggedTemplateLiteralLoose(['\n  color: ', ';\n\n  ', ';\n']);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -625,7 +635,11 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteralLoose(['\n  color: ', ';\n\n  ', ';\n']);
+  var data = _taggedTemplateLiteralLoose([
+    '\n  font-size: ',
+    ';\n  text-overflow: ellipsis;\n  margin: 0;\n  overflow: hidden;\n  padding: 0 8px;\n  white-space: nowrap;\n\n  @media (min-width: 900px) {\n    font-size: ',
+    ';\n  }\n',
+  ]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -636,8 +650,10 @@ function _templateObject11() {
 
 function _templateObject10() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  font-size: ',
-    ';\n  text-overflow: ellipsis;\n  margin: 0;\n  overflow: hidden;\n  padding: 0 8px;\n  white-space: nowrap;\n\n  @media (min-width: 900px) {\n    font-size: ',
+    '\n  align-items: center;\n  display: flex;\n  font-weight: 600;\n  justify-content: center;\n  height: ',
+    ';\n  width: ',
+    ';\n\n  @media (min-width: 900px) {\n    height: ',
+    ';\n    width: ',
     ';\n  }\n',
   ]);
 
@@ -650,11 +666,7 @@ function _templateObject10() {
 
 function _templateObject9() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  align-items: center;\n  display: flex;\n  font-weight: 600;\n  justify-content: center;\n  height: ',
-    ';\n  width: ',
-    ';\n\n  @media (min-width: 900px) {\n    height: ',
-    ';\n    width: ',
-    ';\n  }\n',
+    '\n  background-color: black;\n  position: absolute;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-size: 14px;\n  bottom: -15px;\n  right: -25px;\n  z-index: 99;\n\n  @media (max-width: 900px) {\n    font-size: 12px;\n    bottom: -15px;\n  }\n',
   ]);
 
   _templateObject9 = function _templateObject9() {
@@ -858,7 +870,7 @@ var Node =
                   null,
                   createElement(Text, null, skill.title),
                   createElement(
-                    LevelNode,
+                    TextLevelNode,
                     null,
                     learned,
                     '/',
@@ -876,7 +888,7 @@ var Node =
                     skill.title
                   ),
                   createElement(
-                    LevelNode,
+                    TextLevelNode,
                     null,
                     learned,
                     '/',
@@ -991,11 +1003,17 @@ var LevelNode =
     /*#__PURE__*/
     _templateObject8()
   );
+var TextLevelNode =
+  /*#__PURE__*/
+  styled.div(
+    /*#__PURE__*/
+    _templateObject9()
+  );
 var TextNode =
   /*#__PURE__*/
   styled.div(
     /*#__PURE__*/
-    _templateObject9(),
+    _templateObject10(),
     function(_ref12) {
       var theme = _ref12.theme;
       return theme.nodeMobileTextNodeHeight;
@@ -1017,7 +1035,7 @@ var Text =
   /*#__PURE__*/
   styled.p(
     /*#__PURE__*/
-    _templateObject10(),
+    _templateObject11(),
     function(_ref16) {
       var theme = _ref16.theme;
       return theme.nodeMobileFontSize;
@@ -1031,7 +1049,7 @@ var AlternativeText =
   /*#__PURE__*/
   styled(Text)(
     /*#__PURE__*/
-    _templateObject11(),
+    _templateObject12(),
     function(_ref18) {
       var theme = _ref18.theme;
       return theme.nodeAlternativeFontColor;
@@ -1039,7 +1057,7 @@ var AlternativeText =
     function(props) {
       return (
         props.selected &&
-        css(_templateObject12(), function(_ref19) {
+        css(_templateObject13(), function(_ref19) {
           var theme = _ref19.theme;
           return theme.nodeAltenativeActiveFontColor;
         })
