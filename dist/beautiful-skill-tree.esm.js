@@ -1053,6 +1053,8 @@ function SkillNode(_ref) {
   var skill = _ref.skill,
     nodeState = _ref.nodeState,
     currentLevel = _ref.currentLevel,
+    learned = _ref.learned,
+    handleLearnedChange = _ref.handleLearnedChange,
     incSkillCount = _ref.incSkillCount,
     updateSkillState = _ref.updateSkillState,
     _ref$handleNodeSelect = _ref.handleNodeSelect,
@@ -1075,22 +1077,14 @@ function SkillNode(_ref) {
     id = skill.id,
     optional = skill.optional;
 
-  var _React$useState = useState(0),
+  var _React$useState = React__default.useState(0),
     parentPosition = _React$useState[0],
-    setParentPosition = _React$useState[1];
+    setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
 
-  var _React$useState2 = useState(skill.learned),
-    learned = _React$useState2[0],
-    handleLearnedChange = _React$useState2[1];
-
-  var skillNodeRef = useRef(null);
-  var childWidth = useRef(0);
-  useEffect(
-    function() {
-      handleLearnedChange(skill.learned);
-    },
-    [skill.learned]
-  );
+  var skillNodeRef = React__default.useRef(null);
+  var childWidth = React__default.useRef(0); // useEffect(() => {
+  //   handleLearnedChange(skill.learned);
+  // }, [skill.learned]);
 
   function calculatePosition() {
     var _skillNodeRef$current = skillNodeRef.current.getBoundingClientRect(),
@@ -1160,7 +1154,7 @@ function SkillNode(_ref) {
     return;
   }
 
-  useEffect(function() {
+  React__default.useEffect(function() {
     var throttledHandleResize = throttle(handleResize, 200);
     calculatePosition();
     calculateOverlayWidth();
@@ -1169,7 +1163,7 @@ function SkillNode(_ref) {
       window.removeEventListener('resize', throttledHandleResize);
     };
   }, []);
-  useEffect(
+  React__default.useEffect(
     function() {
       if (learned === skill.levels.length) {
         incSkillCount(optional);
@@ -1180,19 +1174,19 @@ function SkillNode(_ref) {
     [learned]
   );
   var hasMultipleChildren = children.length > 1;
-  return createElement(
-    Fragment,
+  return React__default.createElement(
+    React__default.Fragment,
     null,
-    createElement(
+    React__default.createElement(
       StyledSkillNode,
       null,
-      createElement(
+      React__default.createElement(
         Tooltip,
         {
           title: title,
           tooltip: tooltip,
         },
-        createElement(Node, {
+        React__default.createElement(Node, {
           handleClick: handleClick,
           handleRightClick: handleRightClick,
           id: id,
@@ -1204,11 +1198,11 @@ function SkillNode(_ref) {
       )
     ),
     children.length > 0 &&
-      createElement(
+      React__default.createElement(
         SkillTreeSegmentWrapper,
         null,
         children.map(function(child) {
-          return createElement(SkillTreeSegment, {
+          return React__default.createElement(SkillTreeSegment, {
             key: child.id,
             hasParent: true,
             currentLevel: currentLevel,
@@ -1224,7 +1218,7 @@ function SkillNode(_ref) {
   );
 }
 
-var SkillNode$1 /*#__PURE__*/ = memo(SkillNode);
+var SkillNode$1 /*#__PURE__*/ = React__default.memo(SkillNode);
 var StyledSkillNode =
   /*#__PURE__*/
   styled.div(
@@ -1981,12 +1975,10 @@ function SkillTreeSegment(_ref) {
       if (mounting) return;
 
       if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-        // decrementSelectedCount();
         return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
       }
 
       if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
-        // setLearned(0);
         return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
       }
 
@@ -2603,6 +2595,7 @@ function SkillTree(_ref) {
     treeId = _ref.treeId,
     savedData = _ref.savedData,
     skillPoint = _ref.skillPoint,
+    loading = _ref.loading,
     handleSave = _ref.handleSave,
     handleNodeSelect = _ref.handleNodeSelect,
     handleNodeRemove = _ref.handleNodeRemove,
@@ -2687,7 +2680,9 @@ function SkillTree(_ref) {
                 },
                 React__default.createElement(SkillTreeSegment, {
                   shouldBeUnlocked:
-                    currentLevel >= skill.requiredLevel && skillPoint > 0,
+                    currentLevel >= skill.requiredLevel &&
+                    skillPoint > 0 &&
+                    !loading,
                   currentLevel: currentLevel,
                   skill: skill,
                   hasParent: false,

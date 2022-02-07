@@ -16,6 +16,7 @@ export interface Props {
   disabled?: boolean;
   currentLevel: string | number;
   skillPoint: string | number;
+  loading: boolean;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,
@@ -33,6 +34,7 @@ declare function SkillTree({
   treeId,
   savedData,
   skillPoint,
+  loading,
   handleSave,
   handleNodeSelect,
   handleNodeRemove,

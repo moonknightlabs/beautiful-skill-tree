@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Skill, NodeState } from '../models';
 interface Props {
   skill: Skill;
@@ -30,6 +30,8 @@ declare function SkillNode({
   skill,
   nodeState,
   currentLevel,
+  learned,
+  handleLearnedChange,
   incSkillCount,
   updateSkillState,
   handleNodeSelect,
