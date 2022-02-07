@@ -790,8 +790,7 @@ var Node =
       handleRightClick = props.handleRightClick,
       id = props.id,
       currentState = props.currentState,
-      skill = props.skill,
-      learned = props.learned; // console.log('Skill', skill);
+      skill = props.skill; // console.log('Skill', skill);
 
     var _skill$color = skill.color,
       color = _skill$color === void 0 ? 'default' : _skill$color;
@@ -847,7 +846,13 @@ var Node =
               src: skill.icon,
               containerWidth: 64,
             }),
-            createElement(LevelNode, null, learned, '/', skill.levels.length)
+            createElement(
+              LevelNode,
+              null,
+              skill.learned,
+              '/',
+              skill.levels.length
+            )
           )
         : createElement(
             TextNode,

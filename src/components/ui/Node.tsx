@@ -36,14 +36,7 @@ const Node = React.forwardRef(function Node(
   props: Props,
   ref: React.Ref<HTMLDivElement>
 ) {
-  const {
-    handleClick,
-    handleRightClick,
-    id,
-    currentState,
-    skill,
-    learned,
-  } = props;
+  const { handleClick, handleRightClick, id, currentState, skill } = props;
   // console.log('Skill', skill);
   const { color = 'default' } = skill;
   const [isIOS, setIsIOS] = React.useState(false);
@@ -88,8 +81,8 @@ const Node = React.forwardRef(function Node(
         <IconNode>
           <Icon title="node-icon" src={skill.icon} containerWidth={64} />
           <LevelNode>
-            {/* {skill.learned}/{skill.levels.length} */}
-            {learned}/{skill.levels.length}
+            {skill.learned}/{skill.levels.length}
+            {/* {learned}/{skill.levels.length} */}
           </LevelNode>
         </IconNode>
       ) : (
