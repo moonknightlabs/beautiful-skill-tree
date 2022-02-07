@@ -78688,10 +78688,10 @@ object-assign
           nodeHoverBorderColor:
             'linear-gradient(\n      to right,\n      #b9e562 0%,\n      #41e2bd 50%,\n      #c284d8 100%\n    )',
           nodeIconWidth: '64px',
-          nodeMobileTextNodeHeight: '32px',
-          nodeMobileTextNodeWidth: '108px',
+          nodeMobileTextNodeHeight: '40px',
+          nodeMobileTextNodeWidth: '144px',
           nodeMobileFontSize: '14px',
-          nodeDesktopTextNodeHeight: '28px',
+          nodeDesktopTextNodeHeight: '40px',
           nodeDesktopTextNodeWidth: '144px',
           nodeDesktopFontSize: '16px',
           edgeBorder: '1px solid white',
@@ -82771,7 +82771,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '59531' + '/'
+            protocol + '://' + hostname + ':' + '62092' + '/'
           );
 
           ws.onmessage = function(event) {

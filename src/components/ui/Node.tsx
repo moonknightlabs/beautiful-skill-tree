@@ -256,6 +256,11 @@ const LevelNode = styled.div`
   bottom: -10px;
   right: -25px;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    bottom: -15px;
+  }
 `;
 
 const TextNode = styled.div`

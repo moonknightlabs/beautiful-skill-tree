@@ -41,10 +41,10 @@ const defaultTheme = {
       #c284d8 100%
     )`,
   nodeIconWidth: '64px',
-  nodeMobileTextNodeHeight: '32px',
-  nodeMobileTextNodeWidth: '108px',
+  nodeMobileTextNodeHeight: '40px',
+  nodeMobileTextNodeWidth: '120px',
   nodeMobileFontSize: '14px',
-  nodeDesktopTextNodeHeight: '28px',
+  nodeDesktopTextNodeHeight: '40px',
   nodeDesktopTextNodeWidth: '144px',
   nodeDesktopFontSize: '16px',
   edgeBorder: '1px solid white',

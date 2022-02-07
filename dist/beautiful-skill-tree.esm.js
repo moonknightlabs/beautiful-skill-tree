@@ -208,10 +208,10 @@ var defaultTheme = {
   nodeHoverBorderColor:
     'linear-gradient(\n      to right,\n      #b9e562 0%,\n      #41e2bd 50%,\n      #c284d8 100%\n    )',
   nodeIconWidth: '64px',
-  nodeMobileTextNodeHeight: '32px',
-  nodeMobileTextNodeWidth: '108px',
+  nodeMobileTextNodeHeight: '40px',
+  nodeMobileTextNodeWidth: '120px',
   nodeMobileFontSize: '14px',
-  nodeDesktopTextNodeHeight: '28px',
+  nodeDesktopTextNodeHeight: '40px',
   nodeDesktopTextNodeWidth: '144px',
   nodeDesktopFontSize: '16px',
   edgeBorder: '1px solid white',
@@ -666,7 +666,7 @@ function _templateObject9() {
 
 function _templateObject8() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  background-color: black;\n  position: absolute;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-size: 14px;\n  bottom: -10px;\n  right: -25px;\n  z-index: 99;\n',
+    '\n  background-color: black;\n  position: absolute;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-size: 14px;\n  bottom: -10px;\n  right: -25px;\n  z-index: 99;\n\n  @media (max-width: 600px) {\n    font-size: 12px;\n    bottom: -15px;\n  }\n',
   ]);
 
   _templateObject8 = function _templateObject8() {
