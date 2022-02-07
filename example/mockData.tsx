@@ -512,7 +512,6 @@ export function createSkills(data: Skill): any[] {
   return data.map(skill => {
     return {
       id: skill.id,
-      icon: SquatIcon,
       title: skill.name,
       children: createSkills(skill.children),
       tooltip: {

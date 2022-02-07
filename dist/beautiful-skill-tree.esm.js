@@ -853,13 +853,35 @@ var Node =
             TextNode,
             null,
             color === 'default'
-              ? createElement(Text, null, skill.title)
+              ? createElement(
+                  Fragment,
+                  null,
+                  createElement(Text, null, skill.title),
+                  createElement(
+                    LevelNode,
+                    null,
+                    learned,
+                    '/',
+                    skill.levels.length
+                  )
+                )
               : createElement(
-                  AlternativeText,
-                  {
-                    selected: currentState === SELECTED_STATE,
-                  },
-                  skill.title
+                  Fragment,
+                  null,
+                  createElement(
+                    AlternativeText,
+                    {
+                      selected: currentState === SELECTED_STATE,
+                    },
+                    skill.title
+                  ),
+                  createElement(
+                    LevelNode,
+                    null,
+                    learned,
+                    '/',
+                    skill.levels.length
+                  )
                 )
           )
     );

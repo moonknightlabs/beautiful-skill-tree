@@ -95,11 +95,23 @@ const Node = React.forwardRef(function Node(
       ) : (
         <TextNode>
           {color === 'default' ? (
-            <Text>{skill.title}</Text>
+            <>
+              <Text>{skill.title}</Text>
+              <LevelNode>
+                {/* {skill.learned}/{skill.levels.length} */}
+                {learned}/{skill.levels.length}
+              </LevelNode>
+            </>
           ) : (
-            <AlternativeText selected={currentState === SELECTED_STATE}>
-              {skill.title}
-            </AlternativeText>
+            <>
+              <AlternativeText selected={currentState === SELECTED_STATE}>
+                {skill.title}
+              </AlternativeText>
+              <LevelNode>
+                {/* {skill.learned}/{skill.levels.length} */}
+                {learned}/{skill.levels.length}
+              </LevelNode>
+            </>
           )}
         </TextNode>
       )}

@@ -855,13 +855,35 @@ var Node =
             TextNode,
             null,
             color === 'default'
-              ? React.createElement(Text, null, skill.title)
+              ? React.createElement(
+                  React.Fragment,
+                  null,
+                  React.createElement(Text, null, skill.title),
+                  React.createElement(
+                    LevelNode,
+                    null,
+                    learned,
+                    '/',
+                    skill.levels.length
+                  )
+                )
               : React.createElement(
-                  AlternativeText,
-                  {
-                    selected: currentState === SELECTED_STATE,
-                  },
-                  skill.title
+                  React.Fragment,
+                  null,
+                  React.createElement(
+                    AlternativeText,
+                    {
+                      selected: currentState === SELECTED_STATE,
+                    },
+                    skill.title
+                  ),
+                  React.createElement(
+                    LevelNode,
+                    null,
+                    learned,
+                    '/',
+                    skill.levels.length
+                  )
                 )
           )
     );

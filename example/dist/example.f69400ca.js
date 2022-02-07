@@ -79348,13 +79348,35 @@ object-assign
                     TextNode,
                     null,
                     color === 'default'
-                      ? React.createElement(Text, null, skill.title)
+                      ? React.createElement(
+                          React.Fragment,
+                          null,
+                          React.createElement(Text, null, skill.title),
+                          React.createElement(
+                            LevelNode,
+                            null,
+                            learned,
+                            '/',
+                            skill.levels.length
+                          )
+                        )
                       : React.createElement(
-                          AlternativeText,
-                          {
-                            selected: currentState === SELECTED_STATE,
-                          },
-                          skill.title
+                          React.Fragment,
+                          null,
+                          React.createElement(
+                            AlternativeText,
+                            {
+                              selected: currentState === SELECTED_STATE,
+                            },
+                            skill.title
+                          ),
+                          React.createElement(
+                            LevelNode,
+                            null,
+                            learned,
+                            '/',
+                            skill.levels.length
+                          )
                         )
                   )
             );
@@ -79572,12 +79594,14 @@ object-assign
             id = skill.id,
             optional = skill.optional;
 
-          var _React$useState = React.useState(0),
+          var _React$useState = React__default.useState(0),
             parentPosition = _React$useState[0],
             setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
 
-          var skillNodeRef = React.useRef(null);
-          var childWidth = React.useRef(0);
+          var skillNodeRef = React__default.useRef(null);
+          var childWidth = React__default.useRef(0); // useEffect(() => {
+          //   handleLearnedChange(skill.learned);
+          // }, [skill.learned]);
 
           function calculatePosition() {
             var _skillNodeRef$current = skillNodeRef.current.getBoundingClientRect(),
@@ -79599,7 +79623,6 @@ object-assign
 
           function handleClick() {
             if (nodeState === LOCKED_STATE) {
-              handleLearnedChange(0);
               return null;
             }
 
@@ -79648,7 +79671,7 @@ object-assign
             return;
           }
 
-          React.useEffect(function() {
+          React__default.useEffect(function() {
             var throttledHandleResize = lodash.throttle(handleResize, 200);
             calculatePosition();
             calculateOverlayWidth();
@@ -79657,7 +79680,7 @@ object-assign
               window.removeEventListener('resize', throttledHandleResize);
             };
           }, []);
-          React.useEffect(
+          React__default.useEffect(
             function() {
               if (learned === skill.levels.length) {
                 incSkillCount(optional);
@@ -79668,19 +79691,19 @@ object-assign
             [learned]
           );
           var hasMultipleChildren = children.length > 1;
-          return React.createElement(
-            React.Fragment,
+          return React__default.createElement(
+            React__default.Fragment,
             null,
-            React.createElement(
+            React__default.createElement(
               StyledSkillNode,
               null,
-              React.createElement(
+              React__default.createElement(
                 Tooltip,
                 {
                   title: title,
                   tooltip: tooltip,
                 },
-                React.createElement(Node, {
+                React__default.createElement(Node, {
                   handleClick: handleClick,
                   handleRightClick: handleRightClick,
                   id: id,
@@ -79692,11 +79715,11 @@ object-assign
               )
             ),
             children.length > 0 &&
-              React.createElement(
+              React__default.createElement(
                 SkillTreeSegmentWrapper,
                 null,
                 children.map(function(child) {
-                  return React.createElement(SkillTreeSegment, {
+                  return React__default.createElement(SkillTreeSegment, {
                     key: child.id,
                     hasParent: true,
                     currentLevel: currentLevel,
@@ -79714,7 +79737,7 @@ object-assign
 
         var SkillNode$1 =
           /*#__PURE__*/
-          React.memo(SkillNode);
+          React__default.memo(SkillNode);
         var StyledSkillNode =
           /*#__PURE__*/
           styled__default.div(
@@ -80487,12 +80510,10 @@ object-assign
               if (mounting) return;
 
               if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-                decrementSelectedCount();
                 return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
               }
 
               if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
-                // setLearned(0);
                 return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
               }
 
@@ -80717,42 +80738,6 @@ object-assign
           return null;
         }
 
-        function _templateObject$c() {
-          var data = _taggedTemplateLiteralLoose([
-            '\n  font-family: ',
-            ';\n  margin-top: 0;\n  text-align: center;\n',
-          ]);
-
-          _templateObject$c = function _templateObject() {
-            return data;
-          };
-
-          return data;
-        }
-
-        function SkillCountSubtitle() {
-          var _useContext = React.useContext(SkillContext),
-            skillCount = _useContext.skillCount;
-
-          return React__default.createElement(
-            StyledSkillCountSubtitle,
-            null,
-            skillCount,
-            ' skills'
-          );
-        }
-
-        var StyledSkillCountSubtitle =
-          /*#__PURE__*/
-          styled__default.p(
-            /*#__PURE__*/
-            _templateObject$c(),
-            function(_ref) {
-              var theme = _ref.theme;
-              return theme.headingFont;
-            }
-          );
-
         function _templateObject7$1() {
           var data = _taggedTemplateLiteralLoose([
             '\n  font-family: ',
@@ -80840,10 +80825,10 @@ object-assign
           return data;
         }
 
-        function _templateObject$d() {
+        function _templateObject$c() {
           var data = _taggedTemplateLiteralLoose(['\n  ', '\n  ', '\n']);
 
-          _templateObject$d = function _templateObject() {
+          _templateObject$c = function _templateObject() {
             return data;
           };
 
@@ -80912,8 +80897,7 @@ object-assign
                   },
                   title
                 )
-              ),
-              React__default.createElement(SkillCountSubtitle, null)
+              )
             )
           );
         }
@@ -80922,7 +80906,7 @@ object-assign
           /*#__PURE__*/
           styled__default.div(
             /*#__PURE__*/
-            _templateObject$d(),
+            _templateObject$c(),
             function(_ref) {
               var isDisabled = _ref.isDisabled;
               return (
@@ -81106,13 +81090,13 @@ object-assign
           return data;
         }
 
-        function _templateObject$e() {
+        function _templateObject$d() {
           var data = _taggedTemplateLiteralLoose([
             '\n  background-color: ',
             ';\n  margin: 0 8px 48px;\n  min-width: 304px;\n\n  @media (min-width: 900px) {\n    margin: 0 8px 16px;\n    padding: 16px;\n  }\n',
           ]);
 
-          _templateObject$e = function _templateObject() {
+          _templateObject$d = function _templateObject() {
             return data;
           };
 
@@ -81128,6 +81112,7 @@ object-assign
             treeId = _ref.treeId,
             savedData = _ref.savedData,
             skillPoint = _ref.skillPoint,
+            loading = _ref.loading,
             handleSave = _ref.handleSave,
             handleNodeSelect = _ref.handleNodeSelect,
             handleNodeRemove = _ref.handleNodeRemove,
@@ -81214,7 +81199,8 @@ object-assign
                         React__default.createElement(SkillTreeSegment, {
                           shouldBeUnlocked:
                             currentLevel >= skill.requiredLevel &&
-                            skillPoint > 0,
+                            skillPoint > 0 &&
+                            !loading,
                           currentLevel: currentLevel,
                           skill: skill,
                           hasParent: false,
@@ -81237,7 +81223,7 @@ object-assign
           /*#__PURE__*/
           styled__default.div(
             /*#__PURE__*/
-            _templateObject$e(),
+            _templateObject$d(),
             function(_ref2) {
               var theme = _ref2.theme;
               return theme.backgroundColor;
@@ -81892,7 +81878,6 @@ object-assign
           return data.map(function(skill) {
             return {
               id: skill.id,
-              icon: squat_svg_1.default,
               title: skill.name,
               children: createSkills(skill.children),
               tooltip: {
@@ -82786,7 +82771,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '51035' + '/'
+            protocol + '://' + hostname + ':' + '59531' + '/'
           );
 
           ws.onmessage = function(event) {
