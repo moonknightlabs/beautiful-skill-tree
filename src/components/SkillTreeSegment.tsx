@@ -47,7 +47,7 @@ function SkillTreeSegment({
     if (mounting) return;
 
     if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-      decrementSelectedCount();
+      // decrementSelectedCount();
       return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
     }
 

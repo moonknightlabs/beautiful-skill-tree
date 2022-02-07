@@ -1106,7 +1106,6 @@ function SkillNode(_ref) {
 
   function handleClick() {
     if (nodeState === LOCKED_STATE) {
-      handleLearnedChange(0);
       return null;
     }
 
@@ -1976,7 +1975,7 @@ function SkillTreeSegment(_ref) {
       if (mounting) return;
 
       if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-        decrementSelectedCount();
+        // decrementSelectedCount();
         return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
       }
 

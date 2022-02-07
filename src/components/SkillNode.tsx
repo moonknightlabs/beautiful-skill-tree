@@ -71,7 +71,6 @@ function SkillNode({
 
   function handleClick() {
     if (nodeState === LOCKED_STATE) {
-      handleLearnedChange(0);
       return null;
     }
     if (nodeState === UNLOCKED_STATE) {
