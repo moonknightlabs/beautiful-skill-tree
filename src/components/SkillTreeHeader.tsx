@@ -1,6 +1,5 @@
 import React, { useCallback, useContext } from 'react';
 import styled, { BaseThemedCssFunction, ThemeContext } from 'styled-components';
-import SkillCountSubtitle from './SkillCountSubtitle';
 import { SkillTheme } from '../theme';
 import Tippy from '@tippy.js/react';
 
@@ -66,7 +65,6 @@ function SkillTreeHeader(props: Props) {
           </HeaderCaret>
           <SkillTreeTitle id={id}>{title}</SkillTreeTitle>
         </div>
-        <SkillCountSubtitle />
       </StyledSkillTreeHeader>
     </StyledTippy>
   );

@@ -2188,42 +2188,6 @@ function CalculateNodeCount(_ref) {
   return null;
 }
 
-function _templateObject$c() {
-  var data = _taggedTemplateLiteralLoose([
-    '\n  font-family: ',
-    ';\n  margin-top: 0;\n  text-align: center;\n',
-  ]);
-
-  _templateObject$c = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function SkillCountSubtitle() {
-  var _useContext = useContext(SkillContext),
-    skillCount = _useContext.skillCount;
-
-  return React__default.createElement(
-    StyledSkillCountSubtitle,
-    null,
-    skillCount,
-    ' skills'
-  );
-}
-
-var StyledSkillCountSubtitle =
-  /*#__PURE__*/
-  styled.p(
-    /*#__PURE__*/
-    _templateObject$c(),
-    function(_ref) {
-      var theme = _ref.theme;
-      return theme.headingFont;
-    }
-  );
-
 function _templateObject7$1() {
   var data = _taggedTemplateLiteralLoose([
     '\n  font-family: ',
@@ -2308,10 +2272,10 @@ function _templateObject2$9() {
   return data;
 }
 
-function _templateObject$d() {
+function _templateObject$c() {
   var data = _taggedTemplateLiteralLoose(['\n  ', '\n  ', '\n']);
 
-  _templateObject$d = function _templateObject() {
+  _templateObject$c = function _templateObject() {
     return data;
   };
 
@@ -2380,8 +2344,7 @@ function SkillTreeHeader(props) {
           },
           title
         )
-      ),
-      React__default.createElement(SkillCountSubtitle, null)
+      )
     )
   );
 }
@@ -2389,7 +2352,7 @@ var StyledSkillTreeHeader =
   /*#__PURE__*/
   styled.div(
     /*#__PURE__*/
-    _templateObject$d(),
+    _templateObject$c(),
     function(_ref) {
       var isDisabled = _ref.isDisabled;
       return (
@@ -2573,13 +2536,13 @@ function _templateObject2$a() {
   return data;
 }
 
-function _templateObject$e() {
+function _templateObject$d() {
   var data = _taggedTemplateLiteralLoose([
     '\n  background-color: ',
     ';\n  margin: 0 8px 48px;\n  min-width: 304px;\n\n  @media (min-width: 900px) {\n    margin: 0 8px 16px;\n    padding: 16px;\n  }\n',
   ]);
 
-  _templateObject$e = function _templateObject() {
+  _templateObject$d = function _templateObject() {
     return data;
   };
 
@@ -2704,7 +2667,7 @@ var SkillTreeContainer =
   /*#__PURE__*/
   styled.div(
     /*#__PURE__*/
-    _templateObject$e(),
+    _templateObject$d(),
     function(_ref2) {
       var theme = _ref2.theme;
       return theme.backgroundColor;
