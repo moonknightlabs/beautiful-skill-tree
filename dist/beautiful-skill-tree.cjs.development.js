@@ -786,7 +786,8 @@ var Node =
       handleRightClick = props.handleRightClick,
       id = props.id,
       currentState = props.currentState,
-      skill = props.skill; // console.log('Skill', skill);
+      skill = props.skill,
+      learned = props.learned; // console.log('Skill', skill);
 
     var _skill$color = skill.color,
       color = _skill$color === void 0 ? 'default' : _skill$color;
@@ -845,7 +846,7 @@ var Node =
             React.createElement(
               LevelNode,
               null,
-              skill.learned,
+              learned,
               '/',
               skill.levels.length
             )
@@ -1054,8 +1055,6 @@ function SkillNode(_ref) {
   var skill = _ref.skill,
     nodeState = _ref.nodeState,
     currentLevel = _ref.currentLevel,
-    learned = _ref.learned,
-    handleLearnedChange = _ref.handleLearnedChange,
     incSkillCount = _ref.incSkillCount,
     updateSkillState = _ref.updateSkillState,
     _ref$handleNodeSelect = _ref.handleNodeSelect,
@@ -1080,10 +1079,20 @@ function SkillNode(_ref) {
 
   var _React$useState = React.useState(0),
     parentPosition = _React$useState[0],
-    setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
+    setParentPosition = _React$useState[1];
+
+  var _React$useState2 = React.useState(skill.learned),
+    learned = _React$useState2[0],
+    handleLearnedChange = _React$useState2[1];
 
   var skillNodeRef = React.useRef(null);
   var childWidth = React.useRef(0);
+  React.useEffect(
+    function() {
+      handleLearnedChange(skill.learned);
+    },
+    [skill.learned]
+  );
 
   function calculatePosition() {
     var _skillNodeRef$current = skillNodeRef.current.getBoundingClientRect(),

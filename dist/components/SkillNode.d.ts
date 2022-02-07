@@ -30,8 +30,6 @@ declare function SkillNode({
   skill,
   nodeState,
   currentLevel,
-  learned,
-  handleLearnedChange,
   incSkillCount,
   updateSkillState,
   handleNodeSelect,

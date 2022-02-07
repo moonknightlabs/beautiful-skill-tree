@@ -6,6 +6,7 @@ import SkillTreeSegment from './SkillTreeSegment';
 import Tooltip from './tooltip/Tooltip';
 import { Skill, NodeState } from '../models';
 import Node from './ui/Node';
+import { useEffect } from 'react';
 
 interface Props {
   skill: Skill;
@@ -38,8 +39,8 @@ function SkillNode({
   skill,
   nodeState,
   currentLevel,
-  learned,
-  handleLearnedChange,
+  // learned,
+  // handleLearnedChange,
   incSkillCount,
   // decSkillCount,
   updateSkillState,
@@ -48,9 +49,13 @@ function SkillNode({
 }: Props) {
   const { children, title, tooltip, id, optional } = skill;
   const [parentPosition, setParentPosition] = React.useState(0);
-  // const [learned, handleLearnedChange] = React.useState(skill.learned);
+  const [learned, handleLearnedChange] = React.useState(skill.learned);
   const skillNodeRef: React.RefObject<HTMLDivElement> = React.useRef(null);
   const childWidth: React.MutableRefObject<number> = React.useRef(0);
+
+  useEffect(() => {
+    handleLearnedChange(skill.learned);
+  }, [skill.learned]);
 
   function calculatePosition() {
     const { left, right } = skillNodeRef.current!.getBoundingClientRect();
