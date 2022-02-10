@@ -23,7 +23,7 @@ export interface ISkillContext {
     skills: SavedDataType;
     skillCount: number;
     selectedCount: number;
-    updateSkillState: (key: string, updatedState: NodeState, optional?: boolean) => void;
+    updateSkillState: (key: string, updatedState: NodeState, learned: number, optional?: boolean) => void;
     setSkillCount: (skillCount: number) => void;
     handleNodeSelect: (key: string, state: NodeState, skill: Skill, learned: number) => void;
     handleNodeRemove: (key: string, state: NodeState, skill: Skill, learned: number) => void;
@@ -45,7 +45,7 @@ export declare class SkillTreeProvider extends React.Component<Props, State> {
     setSkillCount: (skillCount: number) => void;
     handleNodeSelect: (key: string, state: NodeState, skill: Skill, learned: number) => void;
     handleNodeRemove: (key: string, state: NodeState, skill: Skill, learned: number) => void;
-    updateSkillState: (key: string, updatedState: NodeState, optional?: boolean) => void;
+    updateSkillState: (key: string, updatedState: NodeState, updatedLearnedState: number, optional?: boolean) => void;
     render(): JSX.Element;
 }
 export default SkillContext;

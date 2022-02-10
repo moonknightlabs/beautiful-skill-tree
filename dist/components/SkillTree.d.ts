@@ -11,10 +11,9 @@ export interface Props {
     disabled?: boolean;
     currentLevel: string | number;
     skillPoint: string | number;
-    loading: boolean;
     handleSave?: (storage: ContextStorage, treeId: string, skills: SavedDataType) => void;
     handleNodeSelect?: (e: NodeSelectEvent) => void;
     handleNodeRemove?: (e: NodeSelectEvent) => void;
 }
-declare function SkillTree({ data, title, description, closedByDefault, currentLevel, treeId, savedData, skillPoint, loading, handleSave, handleNodeSelect, handleNodeRemove, collapsible, disabled, }: Props): JSX.Element;
+declare function SkillTree({ data, title, description, closedByDefault, currentLevel, treeId, savedData, skillPoint, handleSave, handleNodeSelect, handleNodeRemove, collapsible, disabled, }: Props): JSX.Element;
 export default SkillTree;

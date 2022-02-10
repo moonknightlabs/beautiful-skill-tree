@@ -29,6 +29,7 @@ interface Props {
   updateSkillState: (
     key: string,
     updatedState: NodeState,
+    updatedLearnedState: number,
     optional?: boolean
   ) => void;
 }
@@ -81,7 +82,7 @@ function SkillNode({
         handleLearnedChange(learned + 1);
         if (learned < skill.levels.length - 1) {
           handleNodeSelect(id, UNLOCKED_STATE, skill, learned + 1);
-          return updateSkillState(id, UNLOCKED_STATE, optional);
+          return updateSkillState(id, UNLOCKED_STATE, learned + 1, optional);
         }
         return;
       }
@@ -95,21 +96,25 @@ function SkillNode({
       return null;
     }
 
+    if(learned === skill.learned) {
+      return;
+    }
+    
     if (nodeState === UNLOCKED_STATE) {
       if (learned > 0) {
         handleLearnedChange(learned - 1);
         if (learned === 0) {
           handleNodeRemove(id, LOCKED_STATE, skill, learned - 1);
-          return updateSkillState(id, LOCKED_STATE, optional);
+          return updateSkillState(id, LOCKED_STATE, learned - 1, optional);
         }
         handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
-        return updateSkillState(id, UNLOCKED_STATE, optional);
+        return updateSkillState(id, UNLOCKED_STATE, learned - 1, optional);
       }
     }
     if (nodeState === SELECTED_STATE) {
       handleLearnedChange(learned - 1);
       handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
-      return updateSkillState(id, UNLOCKED_STATE, optional);
+      return updateSkillState(id, UNLOCKED_STATE, learned - 1, optional);
     }
     return;
   }
@@ -131,7 +136,7 @@ function SkillNode({
     if (learned === skill.levels.length) {
       incSkillCount(optional);
       handleNodeSelect(id, SELECTED_STATE, skill, learned);
-      return updateSkillState(id, SELECTED_STATE, optional);
+      return updateSkillState(id, SELECTED_STATE, learned, optional);
     }
   }, [learned]);
 

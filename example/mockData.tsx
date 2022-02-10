@@ -601,7 +601,7 @@ export const tree = [
         isLearned: false,
       },
     ],
-    learned: 1,
+    learned: 3,
     children: [
       {
         id: 2,
@@ -684,7 +684,7 @@ export const tree = [
             id: 4,
             skillId: 'shield_slam',
             name: 'Shield Slam 3',
-            requiredLevel: 2,
+            requiredLevel: 0,
             type: 'Active',
             damageType: 'Physical',
             canBeCountered: false,

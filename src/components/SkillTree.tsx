@@ -27,7 +27,6 @@ export interface Props {
   disabled?: boolean;
   currentLevel: string | number;
   skillPoint: string | number;
-  loading: boolean;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,
@@ -50,7 +49,6 @@ function SkillTree({
   treeId,
   savedData,
   skillPoint,
-  loading,
   handleSave,
   handleNodeSelect,
   handleNodeRemove,
@@ -113,8 +111,7 @@ function SkillTree({
                     <SkillTreeSegment
                       shouldBeUnlocked={
                         currentLevel >= skill.requiredLevel &&
-                        skillPoint > 0 &&
-                        !loading
+                        skillPoint > 0
                       }
                       currentLevel={currentLevel}
                       skill={skill}

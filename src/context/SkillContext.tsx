@@ -44,7 +44,8 @@ export interface ISkillContext {
   updateSkillState: (
     key: string,
     updatedState: NodeState,
-    optional?: boolean
+    learned: number,
+    optional?: boolean,
   ) => void;
   setSkillCount: (skillCount: number) => void;
   handleNodeSelect: (
@@ -243,6 +244,7 @@ export class SkillTreeProvider extends React.Component<Props, State> {
   updateSkillState = (
     key: string,
     updatedState: NodeState,
+    updatedLearnedState: number,
     optional: boolean = false
   ) => {
     const { handleSave, treeId } = this.props;
@@ -251,8 +253,10 @@ export class SkillTreeProvider extends React.Component<Props, State> {
       const updatedSkills = {
         ...prevState.skills,
         [key]: {
+          id: key,
           optional,
           nodeState: updatedState,
+          learned: updatedLearnedState,
         },
       };
 

@@ -47,12 +47,12 @@ function SkillTreeSegment({
     if (mounting) return;
 
     if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-      return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
+      return updateSkillState(skill.id, LOCKED_STATE, 0, skill.optional);
     }
 
     if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
       setLearned(0);
-      return updateSkillState(skill.id, LOCKED_STATE, skill.optional);
+      return updateSkillState(skill.id, LOCKED_STATE, 0, skill.optional);
     }
 
     if (!shouldBeUnlocked) {
@@ -60,11 +60,11 @@ function SkillTreeSegment({
     }
 
     if (nodeState === LOCKED_STATE && shouldBeUnlocked) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
+      return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
     }
 
     if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, skill.optional);
+      return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
     }
   }, [nodeState, shouldBeUnlocked, mounting, learned]);
 
@@ -72,7 +72,7 @@ function SkillTreeSegment({
     if (mounting) return;
 
     if (isEmpty(skills)) {
-      return updateSkillState(skill.id, UNLOCKED_STATE);
+      return updateSkillState(skill.id, UNLOCKED_STATE, 0);
     }
 
     return;
