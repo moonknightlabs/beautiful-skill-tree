@@ -1,5 +1,5 @@
 interface Props {
-  display: boolean;
+    display: boolean;
 }
 declare function HSeparator({ display }: Props): JSX.Element;
 export default HSeparator;

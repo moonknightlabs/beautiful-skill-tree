@@ -5,66 +5,61 @@ export declare type TooltipDirection = 'right' | 'left' | 'top' | 'bottom';
 export declare type NodeState = 'locked' | 'unlocked' | 'selected';
 export declare type SkillMap = Record<string, string>;
 export interface SkillGroupData {
-  skillCount: SkillCount;
-  selectedSkillCount: SkillCount;
-  resetSkills: VoidFunction;
-  handleFilter: (query: string) => void;
+    skillCount: SkillCount;
+    selectedSkillCount: SkillCount;
+    resetSkills: VoidFunction;
+    handleFilter: (query: string) => void;
 }
 export declare type SavedDataType = Dictionary<SkillData>;
 export declare type SkillData = {
-  optional: boolean;
-  nodeState: NodeState;
+    optional: boolean;
+    nodeState: NodeState;
 };
 export interface SkillCount {
-  required: number;
-  optional: number;
+    required: number;
+    optional: number;
 }
 export interface Tooltip {
-  content: React.ReactNode;
-  direction?: TooltipDirection;
+    content: React.ReactNode;
+    direction?: TooltipDirection;
 }
 export declare type Action = {
-  type: ActionType;
+    type: ActionType;
 };
-export declare type ActionType =
-  | 'SELECT_REQUIRED_SKILL'
-  | 'DESELECT_REQUIRED_SKILL'
-  | 'SELECT_OPTIONAL_SKILL'
-  | 'DESELECT_OPTIONAL_SKILL'
-  | 'RESET_SKILLS';
+export declare type ActionType = 'SELECT_REQUIRED_SKILL' | 'DESELECT_REQUIRED_SKILL' | 'SELECT_OPTIONAL_SKILL' | 'DESELECT_OPTIONAL_SKILL' | 'RESET_SKILLS';
 interface BaseSkill {
-  id: string;
-  optional?: boolean;
-  color?: 'default' | 'alternative';
-  title: string;
-  tooltip: Tooltip;
-  children: Skill[];
-  levels: SkillLevel[];
-  learned: number;
-  parentId: number;
-  requiredLevel: string;
-  job: string;
+    id: string;
+    optional?: boolean;
+    color?: 'default' | 'alternative';
+    title: string;
+    tooltip: Tooltip;
+    children: Skill[];
+    levels: SkillLevel[];
+    learned: number;
+    parentId: number;
+    requiredLevel: string;
+    job: string;
 }
 interface MajorSkill extends BaseSkill {
-  icon: string;
+    icon: string;
 }
 export interface SkillLevel {
-  id: string;
-  skillId: string;
-  lvl: string;
-  parsedDescription: string;
-  manaCost: string;
-  isLearned: boolean;
+    id: string;
+    skillId: string;
+    lvl: string;
+    parsedDescription: string;
+    manaCost: string;
+    isLearned: boolean;
 }
 export declare type Direction = 'left' | 'right';
 export interface ContextStorage {
-  getItem: (key: string) => Nullable<string>;
-  setItem: (key: string, value: string) => void;
+    getItem: (key: string) => Nullable<string>;
+    setItem: (key: string, value: string) => void;
 }
 export interface NodeSelectEvent {
-  key: string;
-  state: NodeState;
-  skill: Skill;
-  learned: number;
+    key: string;
+    state: NodeState;
+    skill: Skill;
+    learned: number;
 }
 export {};
