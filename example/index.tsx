@@ -29,31 +29,38 @@ import {
 import { ContextStorage } from '../src/models';
 import FilterInput from './components/FIlterInput';
 import DisabledSkillTree from './components/DisabledSkillTree';
+import { useState } from 'react';
 
 function handleSave(
   storage: ContextStorage,
   treeId: string,
   skills: SavedDataType
 ) {
-  console.log(skills);
+  // console.log(skills);
   return storage.setItem(`${treeId}`, JSON.stringify(skills));
 }
 
-function handleNodeSelect(e: NodeSelectEvent) {
-  // console.log('Increment');
-  // console.log(e);
-  // console.log('selected node - ', e.key);
-  // console.log('new state - ', e.state);
-}
-
-function handleNodeRemove(e: NodeSelectEvent) {
-  // console.log('Decrement');
-  // console.log(e);
-  // console.log('selected node - ', e.key);
-  // console.log('new state - ', e.state);
-}
-
 const App = () => {
+  const [skillPoints, setSkillPoints] = useState(10);
+
+  function handleNodeSelect(e: NodeSelectEvent) {
+    setSkillPoints(skillPoints - 1);
+    console.log();
+    // console.log('Increment');
+    // console.log(e);
+    // console.log('selected node - ', e.key);
+    // console.log('new state - ', e.state);
+  }
+
+  function handleNodeRemove(e: NodeSelectEvent) {
+    setSkillPoints(skillPoints + 1);
+    console.log(skillPoints + (e.skill.levels.length - e.learned));
+
+    // console.log('Decrement');
+    // console.log(e);
+    // console.log('selected node - ', e.key);
+    // console.log('new state - ', e.state);
+  }
   return (
     <SkillProvider>
       <SkillTreeGroup
@@ -139,12 +146,11 @@ const App = () => {
                   treeId="web"
                   handleNodeSelect={handleNodeSelect}
                   handleNodeRemove={handleNodeRemove}
-                  title="Programming Tree"
+                  title={`Programming Tree ${skillPoints}`}
                   data={createSkills(tree)}
-                  skillPoint={100}
-                  loading={false}
+                  skillPoint={skillPoints}
                   handleSave={handleSave}
-                  currentLevel={0}
+                  currentLevel={1}
                 />
               </div>
             </React.Fragment>

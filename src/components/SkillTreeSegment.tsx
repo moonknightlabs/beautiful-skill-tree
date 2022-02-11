@@ -13,6 +13,7 @@ type Props = {
   parentHasMultipleChildren: boolean;
   shouldBeUnlocked: boolean;
   currentLevel: string | number | number;
+  skillPoint: string | number;
 } & typeof SkillTreeSegment.defaultProps;
 
 function SkillTreeSegment({
@@ -22,6 +23,7 @@ function SkillTreeSegment({
   parentPosition,
   shouldBeUnlocked,
   currentLevel,
+  skillPoint,
 }: Props) {
   const {
     mounting,
@@ -38,6 +40,9 @@ function SkillTreeSegment({
   );
   const [learned, setLearned] = React.useState(skill.learned);
   const nodeState = skills[skill.id] ? skills[skill.id].nodeState : 'locked';
+  const childrenLearnedState = skill.children.map((child: Skill) => {
+    return skills[child.id];
+  });
 
   useEffect(() => {
     setLearned(skill.learned);
@@ -47,32 +52,46 @@ function SkillTreeSegment({
     if (mounting) return;
 
     if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-      return updateSkillState(skill.id, LOCKED_STATE, 0, skill.optional);
+      return updateSkillState(
+        skill.id,
+        LOCKED_STATE,
+        skill.learned,
+        skill.optional
+      );
     }
 
     if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
-      setLearned(0);
-      return updateSkillState(skill.id, LOCKED_STATE, 0, skill.optional);
+      setLearned(skill.learned);
+      return updateSkillState(
+        skill.id,
+        LOCKED_STATE,
+        skill.learned,
+        skill.optional
+      );
     }
-
     if (!shouldBeUnlocked) {
       return;
     }
 
     if (nodeState === LOCKED_STATE && shouldBeUnlocked) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
+      return updateSkillState(
+        skill.id,
+        UNLOCKED_STATE,
+        skill.learned,
+        skill.optional
+      );
     }
 
     if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
       return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
     }
-  }, [nodeState, shouldBeUnlocked, mounting, learned]);
+  }, [nodeState, shouldBeUnlocked, mounting, learned, childrenLearnedState]);
 
   useEffect(() => {
     if (mounting) return;
 
     if (isEmpty(skills)) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, 0);
+      return updateSkillState(skill.id, UNLOCKED_STATE, skill.learned);
     }
 
     return;
@@ -81,6 +100,7 @@ function SkillTreeSegment({
   const handleLearnedChange = (newValue: number) => {
     setLearned(newValue);
   };
+
   return (
     <div
       style={{
@@ -103,8 +123,10 @@ function SkillTreeSegment({
           currentLevel={currentLevel}
           skill={skill}
           learned={learned}
+          skillPoint={skillPoint}
           handleLearnedChange={handleLearnedChange}
           nodeState={nodeState}
+          childrenLearnedState={childrenLearnedState}
           handleNodeSelect={handleNodeSelect}
           handleNodeRemove={handleNodeRemove}
         />

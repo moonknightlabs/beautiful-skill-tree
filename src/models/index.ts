@@ -20,6 +20,7 @@ export type SavedDataType = Dictionary<SkillData>;
 export type SkillData = {
   optional: boolean;
   nodeState: NodeState;
+  learned: number;
 };
 
 export interface SkillCount {

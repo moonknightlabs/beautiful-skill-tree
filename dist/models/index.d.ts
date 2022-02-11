@@ -14,6 +14,7 @@ export declare type SavedDataType = Dictionary<SkillData>;
 export declare type SkillData = {
     optional: boolean;
     nodeState: NodeState;
+    learned: number;
 };
 export interface SkillCount {
     required: number;

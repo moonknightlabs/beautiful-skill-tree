@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import { LOCKED_STATE, UNLOCKED_STATE, SELECTED_STATE } from './constants';
 import SkillTreeSegment from './SkillTreeSegment';
 import Tooltip from './tooltip/Tooltip';
-import { Skill, NodeState } from '../models';
+import { Skill, NodeState, SkillData } from '../models';
 import Node from './ui/Node';
 interface Props {
   skill: Skill;
   nodeState: NodeState;
   currentLevel: number | string;
   learned: number;
+  skillPoint: string | number;
+  childrenLearnedState: SkillData[];
   handleLearnedChange: (newValue: number) => void;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
@@ -39,9 +41,10 @@ function SkillNode({
   nodeState,
   currentLevel,
   learned,
+  skillPoint,
+  childrenLearnedState,
   handleLearnedChange,
   incSkillCount,
-  // decSkillCount,
   updateSkillState,
   handleNodeSelect = () => null,
   handleNodeRemove = () => null,
@@ -51,10 +54,6 @@ function SkillNode({
   // const [learned, handleLearnedChange] = React.useState(skill.learned);
   const skillNodeRef: React.RefObject<HTMLDivElement> = React.useRef(null);
   const childWidth: React.MutableRefObject<number> = React.useRef(0);
-
-  // useEffect(() => {
-  //   handleLearnedChange(skill.learned);
-  // }, [skill.learned]);
 
   function calculatePosition() {
     const { left, right } = skillNodeRef.current!.getBoundingClientRect();
@@ -77,6 +76,11 @@ function SkillNode({
     if (nodeState === LOCKED_STATE) {
       return null;
     }
+
+    if (skillPoint === 0) {
+      return;
+    }
+
     if (nodeState === UNLOCKED_STATE) {
       if (learned < skill.levels.length) {
         handleLearnedChange(learned + 1);
@@ -96,10 +100,10 @@ function SkillNode({
       return null;
     }
 
-    if(learned === skill.learned) {
+    if (learned === skill.learned) {
       return;
     }
-    
+
     if (nodeState === UNLOCKED_STATE) {
       if (learned > 0) {
         handleLearnedChange(learned - 1);
@@ -111,7 +115,12 @@ function SkillNode({
         return updateSkillState(id, UNLOCKED_STATE, learned - 1, optional);
       }
     }
+
     if (nodeState === SELECTED_STATE) {
+      if(childrenLearnedState && childrenLearnedState.filter((child) => {return child?.learned > 0}).length > 0) {
+        return;
+      }
+      
       handleLearnedChange(learned - 1);
       handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, learned - 1, optional);
@@ -173,6 +182,7 @@ function SkillNode({
                   currentLevel >= child.requiredLevel
                 }
                 skill={child}
+                skillPoint={skillPoint}
               />
             );
           })}

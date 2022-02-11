@@ -854,6 +854,8 @@ function SkillNode(_ref) {
       nodeState = _ref.nodeState,
       currentLevel = _ref.currentLevel,
       learned = _ref.learned,
+      skillPoint = _ref.skillPoint,
+      childrenLearnedState = _ref.childrenLearnedState,
       handleLearnedChange = _ref.handleLearnedChange,
       incSkillCount = _ref.incSkillCount,
       updateSkillState = _ref.updateSkillState,
@@ -877,9 +879,7 @@ function SkillNode(_ref) {
 
 
   var skillNodeRef = React__default.useRef(null);
-  var childWidth = React__default.useRef(0); // useEffect(() => {
-  //   handleLearnedChange(skill.learned);
-  // }, [skill.learned]);
+  var childWidth = React__default.useRef(0);
 
   function calculatePosition() {
     var _skillNodeRef$current = skillNodeRef.current.getBoundingClientRect(),
@@ -902,6 +902,10 @@ function SkillNode(_ref) {
   function handleClick() {
     if (nodeState === LOCKED_STATE) {
       return null;
+    }
+
+    if (skillPoint === 0) {
+      return;
     }
 
     if (nodeState === UNLOCKED_STATE) {
@@ -945,6 +949,12 @@ function SkillNode(_ref) {
     }
 
     if (nodeState === SELECTED_STATE) {
+      if (childrenLearnedState && childrenLearnedState.filter(function (child) {
+        return (child === null || child === void 0 ? void 0 : child.learned) > 0;
+      }).length > 0) {
+        return;
+      }
+
       handleLearnedChange(learned - 1);
       handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, learned - 1, optional);
@@ -989,7 +999,8 @@ function SkillNode(_ref) {
       parentPosition: parentPosition,
       parentHasMultipleChildren: hasMultipleChildren,
       shouldBeUnlocked: nodeState === SELECTED_STATE && currentLevel >= child.requiredLevel,
-      skill: child
+      skill: child,
+      skillPoint: skillPoint
     });
   })));
 }
@@ -1456,7 +1467,8 @@ function (_React$Component) {
         var resettedSkills = mapValues(skills, function (skill) {
           return {
             optional: skill.optional,
-            nodeState: LOCKED_STATE
+            nodeState: LOCKED_STATE,
+            learned: skill.learned
           };
         });
         return {
@@ -1600,7 +1612,8 @@ function SkillTreeSegment(_ref) {
       parentHasMultipleChildren = _ref.parentHasMultipleChildren,
       parentPosition = _ref.parentPosition,
       shouldBeUnlocked = _ref.shouldBeUnlocked,
-      currentLevel = _ref.currentLevel;
+      currentLevel = _ref.currentLevel,
+      skillPoint = _ref.skillPoint;
 
   var _useContext = useContext(SkillContext),
       mounting = _useContext.mounting,
@@ -1618,6 +1631,9 @@ function SkillTreeSegment(_ref) {
       setLearned = _React$useState[1];
 
   var nodeState = skills[skill.id] ? skills[skill.id].nodeState : 'locked';
+  var childrenLearnedState = skill.children.map(function (child) {
+    return skills[child.id];
+  });
   useEffect(function () {
     setLearned(skill.learned);
   }, [skill.learned]);
@@ -1625,12 +1641,12 @@ function SkillTreeSegment(_ref) {
     if (mounting) return;
 
     if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
-      return updateSkillState(skill.id, LOCKED_STATE, 0, skill.optional);
+      return updateSkillState(skill.id, LOCKED_STATE, skill.learned, skill.optional);
     }
 
     if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
-      setLearned(0);
-      return updateSkillState(skill.id, LOCKED_STATE, 0, skill.optional);
+      setLearned(skill.learned);
+      return updateSkillState(skill.id, LOCKED_STATE, skill.learned, skill.optional);
     }
 
     if (!shouldBeUnlocked) {
@@ -1638,18 +1654,18 @@ function SkillTreeSegment(_ref) {
     }
 
     if (nodeState === LOCKED_STATE && shouldBeUnlocked) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
+      return updateSkillState(skill.id, UNLOCKED_STATE, skill.learned, skill.optional);
     }
 
     if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
       return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
     }
-  }, [nodeState, shouldBeUnlocked, mounting, learned]);
+  }, [nodeState, shouldBeUnlocked, mounting, learned, childrenLearnedState]);
   useEffect(function () {
     if (mounting) return;
 
     if (isEmpty(skills)) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, 0);
+      return updateSkillState(skill.id, UNLOCKED_STATE, skill.learned);
     }
 
     return;
@@ -1677,8 +1693,10 @@ function SkillTreeSegment(_ref) {
     currentLevel: currentLevel,
     skill: skill,
     learned: learned,
+    skillPoint: skillPoint,
     handleLearnedChange: handleLearnedChange,
     nodeState: nodeState,
+    childrenLearnedState: childrenLearnedState,
     handleNodeSelect: handleNodeSelect,
     handleNodeRemove: handleNodeRemove
   })));
@@ -2136,12 +2154,13 @@ function SkillTree(_ref) {
     return React__default.createElement(React__default.Fragment, {
       key: skill.id
     }, React__default.createElement(SkillTreeSegment, {
-      shouldBeUnlocked: currentLevel >= skill.requiredLevel && skillPoint > 0,
+      shouldBeUnlocked: currentLevel >= skill.requiredLevel,
       currentLevel: currentLevel,
       skill: skill,
       hasParent: false,
       parentPosition: 0,
-      parentHasMultipleChildren: false
+      parentHasMultipleChildren: false,
+      skillPoint: skillPoint
     }), React__default.createElement(HSeparator, {
       display: displaySeparator
     }));

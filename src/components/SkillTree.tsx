@@ -109,15 +109,14 @@ function SkillTree({
                 return (
                   <React.Fragment key={skill.id}>
                     <SkillTreeSegment
-                      shouldBeUnlocked={
-                        currentLevel >= skill.requiredLevel &&
-                        skillPoint > 0
-                      }
+                      shouldBeUnlocked={currentLevel >= skill.requiredLevel}
                       currentLevel={currentLevel}
                       skill={skill}
                       hasParent={false}
                       parentPosition={0}
                       parentHasMultipleChildren={false}
+                      skillPoint={skillPoint}
+                      // isChild={false}
                     />
                     <HSeparator display={displaySeparator} />
                   </React.Fragment>

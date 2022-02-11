@@ -197,6 +197,7 @@ export class SkillTreeProvider extends React.Component<Props, State> {
         (skill: SkillData) => ({
           optional: skill.optional,
           nodeState: LOCKED_STATE,
+          learned: skill.learned,
         })
       );
 
