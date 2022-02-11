@@ -56,6 +56,7 @@ interface BaseSkill {
   parentId: number;
   requiredLevel: string;
   job: string;
+  jobName: string;
 }
 interface MajorSkill extends BaseSkill {
   icon: string;
