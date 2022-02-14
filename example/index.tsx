@@ -54,8 +54,6 @@ const App = () => {
 
   function handleNodeRemove(e: NodeSelectEvent) {
     setSkillPoints(skillPoints + 1);
-    console.log(skillPoints + (e.skill.levels.length - e.learned));
-
     // console.log('Decrement');
     // console.log(e);
     // console.log('selected node - ', e.key);

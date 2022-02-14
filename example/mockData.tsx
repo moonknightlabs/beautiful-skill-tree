@@ -678,7 +678,7 @@ export const tree = [
             isLearned: false,
           },
         ],
-        learned: 2,
+        learned: 0,
         children: [
           {
             id: 4,

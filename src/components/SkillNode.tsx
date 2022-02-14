@@ -117,10 +117,14 @@ function SkillNode({
     }
 
     if (nodeState === SELECTED_STATE) {
-      if(childrenLearnedState && childrenLearnedState.filter((child) => {return child?.learned > 0}).length > 0) {
+      if (
+        childrenLearnedState &&
+        childrenLearnedState.filter(child => {
+          return child.learned > 0;
+        }).length > 0
+      ) {
         return;
       }
-      
       handleLearnedChange(learned - 1);
       handleNodeRemove(id, UNLOCKED_STATE, skill, learned - 1);
       return updateSkillState(id, UNLOCKED_STATE, learned - 1, optional);
@@ -154,7 +158,13 @@ function SkillNode({
   return (
     <React.Fragment>
       <StyledSkillNode>
-        <Tooltip title={title} tooltip={tooltip}>
+        <Tooltip
+          title={title}
+          tooltip={tooltip}
+          handleSelect={handleClick}
+          handleRemove={handleRightClick}
+          currentState={nodeState}
+        >
           <Node
             handleClick={handleClick}
             handleRightClick={handleRightClick}

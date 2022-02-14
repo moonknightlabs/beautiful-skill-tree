@@ -5,6 +5,7 @@ import { Skill } from '../../models';
 import Icon from './Icon';
 import isIOSDevice from '../../helpers/isIOS';
 import { SkillThemeType } from '../../';
+import useMobile from '../../hooks/useMobile';
 
 const keyframes = require('styled-components').keyframes;
 const css: BaseThemedCssFunction<SkillThemeType> = require('styled-components')
@@ -47,7 +48,7 @@ const Node = React.forwardRef(function Node(
   // console.log('Skill', skill);
   const { color = 'default' } = skill;
   const [isIOS, setIsIOS] = React.useState(false);
-
+  const isMobile = useMobile();
   const memoizedHandleKeyDown = React.useCallback(
     function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
       if (e.keyCode === 13) {
@@ -63,12 +64,14 @@ const Node = React.forwardRef(function Node(
 
   const checkForClickType = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (isMobile) return;
     if (e.button === 0) {
       handleClick();
     } else if (e.button === 2) {
       handleRightClick();
     }
   };
+
   return (
     <StyledNode
       onClick={checkForClickType}
