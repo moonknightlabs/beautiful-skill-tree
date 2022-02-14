@@ -2121,6 +2121,12 @@ function SkillTreeSegment(_ref) {
   });
   React.useEffect(
     function() {
+      setLearned(skill.actualLearned);
+    },
+    [skill.actualLearned]
+  );
+  React.useEffect(
+    function() {
       if (mounting) return;
 
       if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
