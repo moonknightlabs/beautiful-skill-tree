@@ -45,6 +45,10 @@ function SkillTreeSegment({
   });
 
   useEffect(() => {
+    setLearned(skill.actualLearned);
+  }, [skill.actualLearned]);
+
+  useEffect(() => {
     if (mounting) return;
 
     if (nodeState === SELECTED_STATE && !shouldBeUnlocked) {
