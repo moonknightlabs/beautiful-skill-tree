@@ -116,7 +116,6 @@ function SkillTree({
                       parentPosition={0}
                       parentHasMultipleChildren={false}
                       skillPoint={skillPoint}
-                      // isChild={false}
                     />
                     <HSeparator display={displaySeparator} />
                   </React.Fragment>

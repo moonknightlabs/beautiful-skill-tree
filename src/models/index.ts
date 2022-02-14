@@ -53,6 +53,7 @@ interface BaseSkill {
   children: Skill[];
   levels: SkillLevel[];
   learned: number;
+  actualLearned: number;
   parentId: number;
   requiredLevel: string;
   job: string;

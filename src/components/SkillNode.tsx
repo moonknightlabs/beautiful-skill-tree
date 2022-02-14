@@ -100,7 +100,7 @@ function SkillNode({
       return null;
     }
 
-    if (learned === skill.learned) {
+    if (learned === skill.actualLearned) {
       return;
     }
 
