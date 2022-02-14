@@ -83,7 +83,12 @@ function SkillTreeSegment({
     }
 
     if (nodeState === SELECTED_STATE && shouldBeUnlocked && learned === 0) {
-      return updateSkillState(skill.id, UNLOCKED_STATE, 0, skill.optional);
+      return updateSkillState(
+        skill.id,
+        UNLOCKED_STATE,
+        skill.learned,
+        skill.optional
+      );
     }
   }, [nodeState, shouldBeUnlocked, mounting, learned, childrenLearnedState]);
 
