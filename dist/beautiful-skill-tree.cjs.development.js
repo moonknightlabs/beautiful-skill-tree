@@ -1203,7 +1203,7 @@ function SkillNode(_ref) {
 
   var _React$useState = React__default.useState(0),
     parentPosition = _React$useState[0],
-    setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
+    setParentPosition = _React$useState[1];
 
   var skillNodeRef = React__default.useRef(null);
   var childWidth = React__default.useRef(0);
@@ -2119,14 +2119,6 @@ function SkillTreeSegment(_ref) {
   var childrenLearnedState = skill.children.map(function(child) {
     return skills[child.id];
   });
-  React.useEffect(
-    function() {
-      if (skill.learned === skill.actualLearned) {
-        setLearned(skill.actualLearned);
-      }
-    },
-    [skill.actualLearned]
-  );
   React.useEffect(
     function() {
       if (mounting) return;

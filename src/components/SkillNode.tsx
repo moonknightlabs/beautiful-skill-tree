@@ -51,7 +51,6 @@ function SkillNode({
 }: Props) {
   const { children, title, tooltip, id, optional } = skill;
   const [parentPosition, setParentPosition] = React.useState(0);
-  // const [learned, handleLearnedChange] = React.useState(skill.learned);
   const skillNodeRef: React.RefObject<HTMLDivElement> = React.useRef(null);
   const childWidth: React.MutableRefObject<number> = React.useRef(0);
 
