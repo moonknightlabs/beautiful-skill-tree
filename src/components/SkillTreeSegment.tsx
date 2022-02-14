@@ -45,7 +45,9 @@ function SkillTreeSegment({
   });
 
   useEffect(() => {
-    setLearned(skill.actualLearned);
+    if (skill.learned === skill.actualLearned) {
+      setLearned(skill.actualLearned);
+    }
   }, [skill.actualLearned]);
 
   useEffect(() => {

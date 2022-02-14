@@ -2121,7 +2121,9 @@ function SkillTreeSegment(_ref) {
   });
   React.useEffect(
     function() {
-      setLearned(skill.actualLearned);
+      if (skill.learned === skill.actualLearned) {
+        setLearned(skill.actualLearned);
+      }
     },
     [skill.actualLearned]
   );
