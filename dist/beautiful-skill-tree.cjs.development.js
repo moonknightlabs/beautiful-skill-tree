@@ -2111,7 +2111,7 @@ function SkillTreeSegment(_ref) {
 
   var skillNodeRef = React.useRef(null);
 
-  var _React$useState = React__default.useState(skill.actualLearned),
+  var _React$useState = React__default.useState(skill.learned),
     learned = _React$useState[0],
     setLearned = _React$useState[1];
 
@@ -2121,9 +2121,9 @@ function SkillTreeSegment(_ref) {
   });
   React.useEffect(
     function() {
-      setLearned(skill.actualLearned);
+      setLearned(skill.learned);
     },
-    [skill.actualLearned]
+    [skill.learned]
   );
   React.useEffect(
     function() {
@@ -2133,17 +2133,17 @@ function SkillTreeSegment(_ref) {
         return updateSkillState(
           skill.id,
           LOCKED_STATE,
-          skill.actualLearned,
+          skill.learned,
           skill.optional
         );
       }
 
       if (nodeState === UNLOCKED_STATE && !shouldBeUnlocked) {
-        setLearned(skill.actualLearned);
+        setLearned(skill.learned);
         return updateSkillState(
           skill.id,
           LOCKED_STATE,
-          skill.actualLearned,
+          skill.learned,
           skill.optional
         );
       }
@@ -2156,7 +2156,7 @@ function SkillTreeSegment(_ref) {
         return updateSkillState(
           skill.id,
           UNLOCKED_STATE,
-          skill.actualLearned,
+          skill.learned,
           skill.optional
         );
       }
@@ -2172,7 +2172,7 @@ function SkillTreeSegment(_ref) {
       if (mounting) return;
 
       if (lodash.isEmpty(skills)) {
-        return updateSkillState(skill.id, UNLOCKED_STATE, skill.actualLearned);
+        return updateSkillState(skill.id, UNLOCKED_STATE, skill.learned);
       }
 
       return;
