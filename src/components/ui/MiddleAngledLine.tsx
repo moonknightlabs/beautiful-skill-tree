@@ -20,8 +20,8 @@ function MiddleAngledLine(props: Props) {
 
   const width =
     direction === 'left'
-      ? parentPosition - childPosition - 6
-      : childPosition - parentPosition - 6;
+      ? parentPosition - childPosition - 6 + 5
+      : childPosition - parentPosition - 6 + 5;
 
   return (
     <AngledLineHoriztonal

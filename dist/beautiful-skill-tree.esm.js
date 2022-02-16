@@ -192,6 +192,7 @@ var defaultTheme = {
   headingFontSize: '24px',
   headingHoverColor: '#35373b',
   headingHoverColorTransition: 'background 0.3s ease-out',
+  tooltipTitleFontSize: '20px',
   tooltipBackgroundColor: 'white',
   tooltipFontColor: '#16181c',
   tooltipZIndex: 99999,
@@ -367,9 +368,21 @@ var useMobile = function useMobile() {
   return width < 1200;
 };
 
+function _templateObject5() {
+  var data = _taggedTemplateLiteralLoose([
+    '\n  border: 1px solid #79ecc7;\n  background: transparent;\n  padding: 10px;\n  color: #79ecc7;\n  transition: 0.2s;\n  width: 100%;\n  border-radius: 5px;\n\n  :hover {\n    background-color: #79ecc7;\n    cursor: pointer;\n    color: white;\n  }\n',
+  ]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject4() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  border: 1px solid #fec602;\n  background: transparent;\n  padding: 10px;\n  color: #fec602;\n  transition: 0.2s;\n\n  :hover {\n    background-color: #fec602;\n    color: white;\n  }\n',
+    '\n  display: flex;\n  column-gap: 30px;\n  margin: 20px 0 10px;\n',
   ]);
 
   _templateObject4 = function _templateObject4() {
@@ -380,9 +393,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteralLoose([
-    '\n  display: flex;\n  column-gap: 20px;\n  margin-top: 20px;\n',
-  ]);
+  var data = _taggedTemplateLiteralLoose(['\n  margin: 8px 0;\n']);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -392,7 +403,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteralLoose(['\n  margin: 8px 0;\n']);
+  var data = _taggedTemplateLiteralLoose(['\n  font-weight: bold;\n']);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -402,7 +413,11 @@ function _templateObject2() {
 }
 
 function _templateObject$1() {
-  var data = _taggedTemplateLiteralLoose(['\n  margin: 8px 0;\n']);
+  var data = _taggedTemplateLiteralLoose([
+    '\n  font-family: ',
+    ';\n  font-size: ',
+    ';\n  margin: 8px 0 0;\n',
+  ]);
 
   _templateObject$1 = function _templateObject() {
     return data;
@@ -416,6 +431,7 @@ var TooltipContent =
     var content = _ref.content,
       title = _ref.title,
       currentState = _ref.currentState,
+      type = _ref.type,
       handleClose = _ref.handleClose,
       handleSelect = _ref.handleSelect,
       handleRemove = _ref.handleRemove;
@@ -443,6 +459,7 @@ var TooltipContent =
           alt: 'icon',
         })
       ),
+      createElement(Type, null, type, ' Skill'),
       createElement(ContentContainer, null, content),
       isMobile &&
         currentState !== LOCKED_STATE &&
@@ -452,16 +469,16 @@ var TooltipContent =
           createElement(
             Button,
             {
-              onClick: handleSelect,
+              onClick: handleRemove,
             },
-            'Learn'
+            '-1 Level'
           ),
           createElement(
             Button,
             {
-              onClick: handleRemove,
+              onClick: handleSelect,
             },
-            'Unlearn'
+            '+1 Level'
           )
         )
     );
@@ -470,25 +487,39 @@ var Title =
   /*#__PURE__*/
   styled.h1(
     /*#__PURE__*/
-    _templateObject$1()
+    _templateObject$1(),
+    function(_ref2) {
+      var theme = _ref2.theme;
+      return theme.headingFont;
+    },
+    function(_ref3) {
+      var theme = _ref3.theme;
+      return theme.tooltipTitleFontSize;
+    }
   );
-var ContentContainer =
+var Type =
   /*#__PURE__*/
   styled.div(
     /*#__PURE__*/
     _templateObject2()
   );
-var ButtonContainer =
+var ContentContainer =
   /*#__PURE__*/
   styled.div(
     /*#__PURE__*/
     _templateObject3()
   );
+var ButtonContainer =
+  /*#__PURE__*/
+  styled.div(
+    /*#__PURE__*/
+    _templateObject4()
+  );
 var Button =
   /*#__PURE__*/
   styled.button(
     /*#__PURE__*/
-    _templateObject4()
+    _templateObject5()
   );
 
 function _templateObject$2() {
@@ -512,6 +543,7 @@ function Tooltip(props) {
   var children = props.children,
     tooltip = props.tooltip,
     title = props.title,
+    type = props.type,
     handleSelect = props.handleSelect,
     handleRemove = props.handleRemove,
     currentState = props.currentState;
@@ -542,12 +574,13 @@ function Tooltip(props) {
         handleClose: hideTooltip,
         content: content,
         title: title,
+        type: type,
         currentState: currentState,
         handleSelect: handleSelect,
         handleRemove: handleRemove,
       });
     },
-    [content, title, currentState, handleSelect, handleRemove]
+    [content, title, currentState, handleSelect, handleRemove, type]
   ); // const tooltipContent = React.createElement(() => {
   //   return (
   //     <TooltipContent
@@ -789,7 +822,7 @@ function _templateObject6() {
   return data;
 }
 
-function _templateObject5() {
+function _templateObject5$1() {
   var data = _taggedTemplateLiteralLoose([
     '\n      animation: ',
     ' 1s infinite alternate;\n      box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5);\n\n      &:after,\n      &:before {\n        border: 0 solid;\n        border-image-source: ',
@@ -801,7 +834,7 @@ function _templateObject5() {
     ';\n        }\n      }\n    ',
   ]);
 
-  _templateObject5 = function _templateObject5() {
+  _templateObject5$1 = function _templateObject5() {
     return data;
   };
 
@@ -1022,7 +1055,7 @@ var StyledNode =
       return (
         props.unlocked &&
         css(
-          _templateObject5(),
+          _templateObject5$1(),
           shadowpulse,
           function(_ref5) {
             var theme = _ref5.theme;
@@ -1147,7 +1180,7 @@ var AlternativeText =
 
 function _templateObject2$3() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  display: flex;\n  justify-content: center;\n  position: relative;\n',
+    '\n  display: flex;\n  justify-content: center;\n  position: relative;\n  column-gap: 50px;\n',
   ]);
 
   _templateObject2$3 = function _templateObject2() {
@@ -1197,7 +1230,8 @@ function SkillNode(_ref) {
     title = skill.title,
     tooltip = skill.tooltip,
     id = skill.id,
-    optional = skill.optional;
+    optional = skill.optional,
+    type = skill.type;
 
   var _React$useState = React__default.useState(0),
     parentPosition = _React$useState[0],
@@ -1322,6 +1356,7 @@ function SkillNode(_ref) {
         {
           title: title,
           tooltip: tooltip,
+          type: type,
           handleSelect: handleClick,
           handleRemove: handleRightClick,
           currentState: nodeState,
@@ -1644,8 +1679,8 @@ function MiddleAngledLine(props) {
     state = props.state;
   var width =
     direction === 'left'
-      ? parentPosition - childPosition - 6
-      : childPosition - parentPosition - 6;
+      ? parentPosition - childPosition - 6 + 5
+      : childPosition - parentPosition - 6 + 5;
   return React__default.createElement(AngledLineHoriztonal, {
     'data-testid': 'middle-angled-line',
     direction: direction,
@@ -2392,12 +2427,12 @@ function _templateObject6$1() {
   return data;
 }
 
-function _templateObject5$1() {
+function _templateObject5$2() {
   var data = _taggedTemplateLiteralLoose([
     '\n      transform: rotate(180deg);\n    ',
   ]);
 
-  _templateObject5$1 = function _templateObject5() {
+  _templateObject5$2 = function _templateObject5() {
     return data;
   };
 
@@ -2592,7 +2627,7 @@ var HeaderCaret =
     },
     function(_ref13) {
       var isVisible = _ref13.isVisible;
-      return isVisible && css$6(_templateObject5$1());
+      return isVisible && css$6(_templateObject5$2());
     }
   );
 var StyledTippy$1 =

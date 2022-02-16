@@ -10,6 +10,7 @@ type Props = {
   content: React.ReactNode;
   title: string;
   currentState: NodeState;
+  type: string;
   handleClose: () => void;
   handleSelect: () => void;
   handleRemove: () => void;
@@ -19,6 +20,7 @@ const TooltipContent = React.memo(function({
   content,
   title,
   currentState,
+  type,
   handleClose,
   handleSelect,
   handleRemove,
@@ -39,11 +41,12 @@ const TooltipContent = React.memo(function({
           alt="icon"
         />
       </div>
+      <Type>{type} Skill</Type>
       <ContentContainer>{content}</ContentContainer>
       {isMobile && currentState !== LOCKED_STATE && (
         <ButtonContainer>
-          <Button onClick={handleSelect}>Learn</Button>
-          <Button onClick={handleRemove}>Unlearn</Button>
+          <Button onClick={handleRemove}>-1 Level</Button>
+          <Button onClick={handleSelect}>+1 Level</Button>
         </ButtonContainer>
       )}
     </React.Fragment>
@@ -53,7 +56,13 @@ const TooltipContent = React.memo(function({
 export default TooltipContent;
 
 const Title = styled.h1`
-  margin: 8px 0;
+  font-family: ${({ theme }) => theme.headingFont};
+  font-size: ${({ theme }) => theme.tooltipTitleFontSize};
+  margin: 8px 0 0;
+`;
+
+const Type = styled.div`
+  font-weight: bold;
 `;
 
 const ContentContainer = styled.div`
@@ -62,19 +71,22 @@ const ContentContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  column-gap: 20px;
-  margin-top: 20px;
+  column-gap: 30px;
+  margin: 20px 0 10px;
 `;
 
 const Button = styled.button`
-  border: 1px solid #fec602;
+  border: 1px solid #79ecc7;
   background: transparent;
   padding: 10px;
-  color: #fec602;
+  color: #79ecc7;
   transition: 0.2s;
+  width: 100%;
+  border-radius: 5px;
 
   :hover {
-    background-color: #fec602;
+    background-color: #79ecc7;
+    cursor: pointer;
     color: white;
   }
 `;

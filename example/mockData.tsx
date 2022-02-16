@@ -521,6 +521,7 @@ export function createSkills(data: Skill): any[] {
       levels: skill.levels,
       parentId: skill.parentId,
       requiredLevel: skill.requiredLevel,
+      type: skill.type,
     };
   });
 }

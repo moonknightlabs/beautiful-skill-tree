@@ -6,6 +6,7 @@ interface Props {
   title: string;
   tooltip: Tooltip;
   currentState: NodeState;
+  type: string;
   handleSelect: () => void;
   handleRemove: () => void;
 }

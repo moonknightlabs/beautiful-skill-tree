@@ -15,6 +15,7 @@ interface Props {
   title: string;
   tooltip: Tooltip;
   currentState: NodeState;
+  type: string;
   handleSelect: () => void;
   handleRemove: () => void;
 }
@@ -24,6 +25,7 @@ function Tooltip(props: Props) {
     children,
     tooltip,
     title,
+    type,
     handleSelect,
     handleRemove,
     currentState,
@@ -50,12 +52,13 @@ function Tooltip(props: Props) {
         handleClose={hideTooltip}
         content={content}
         title={title}
+        type={type}
         currentState={currentState}
         handleSelect={handleSelect}
         handleRemove={handleRemove}
       />
     );
-  }, [content, title, currentState, handleSelect, handleRemove]);
+  }, [content, title, currentState, handleSelect, handleRemove, type]);
 
   // const tooltipContent = React.createElement(() => {
   //   return (

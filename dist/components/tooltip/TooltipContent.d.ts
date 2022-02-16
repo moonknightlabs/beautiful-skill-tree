@@ -4,6 +4,7 @@ declare type Props = {
   content: React.ReactNode;
   title: string;
   currentState: NodeState;
+  type: string;
   handleClose: () => void;
   handleSelect: () => void;
   handleRemove: () => void;

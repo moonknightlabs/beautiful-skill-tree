@@ -78672,6 +78672,7 @@ object-assign
           headingFontSize: '24px',
           headingHoverColor: '#35373b',
           headingHoverColorTransition: 'background 0.3s ease-out',
+          tooltipTitleFontSize: '20px',
           tooltipBackgroundColor: 'white',
           tooltipFontColor: '#16181c',
           tooltipZIndex: 99999,
@@ -78846,9 +78847,21 @@ object-assign
           return width < 1200;
         };
 
+        function _templateObject5() {
+          var data = _taggedTemplateLiteralLoose([
+            '\n  border: 1px solid #79ecc7;\n  background: transparent;\n  padding: 10px;\n  color: #79ecc7;\n  transition: 0.2s;\n  width: 100%;\n  border-radius: 5px;\n\n  :hover {\n    background-color: #79ecc7;\n    cursor: pointer;\n    color: white;\n  }\n',
+          ]);
+
+          _templateObject5 = function _templateObject5() {
+            return data;
+          };
+
+          return data;
+        }
+
         function _templateObject4() {
           var data = _taggedTemplateLiteralLoose([
-            '\n  border: 1px solid #fec602;\n  background: transparent;\n  padding: 10px;\n  color: #fec602;\n  transition: 0.2s;\n\n  :hover {\n    background-color: #fec602;\n    color: white;\n  }\n',
+            '\n  display: flex;\n  column-gap: 30px;\n  margin: 20px 0 10px;\n',
           ]);
 
           _templateObject4 = function _templateObject4() {
@@ -78859,9 +78872,7 @@ object-assign
         }
 
         function _templateObject3() {
-          var data = _taggedTemplateLiteralLoose([
-            '\n  display: flex;\n  column-gap: 20px;\n  margin-top: 20px;\n',
-          ]);
+          var data = _taggedTemplateLiteralLoose(['\n  margin: 8px 0;\n']);
 
           _templateObject3 = function _templateObject3() {
             return data;
@@ -78871,7 +78882,7 @@ object-assign
         }
 
         function _templateObject2() {
-          var data = _taggedTemplateLiteralLoose(['\n  margin: 8px 0;\n']);
+          var data = _taggedTemplateLiteralLoose(['\n  font-weight: bold;\n']);
 
           _templateObject2 = function _templateObject2() {
             return data;
@@ -78881,7 +78892,11 @@ object-assign
         }
 
         function _templateObject$1() {
-          var data = _taggedTemplateLiteralLoose(['\n  margin: 8px 0;\n']);
+          var data = _taggedTemplateLiteralLoose([
+            '\n  font-family: ',
+            ';\n  font-size: ',
+            ';\n  margin: 8px 0 0;\n',
+          ]);
 
           _templateObject$1 = function _templateObject() {
             return data;
@@ -78896,6 +78911,7 @@ object-assign
             var content = _ref.content,
               title = _ref.title,
               currentState = _ref.currentState,
+              type = _ref.type,
               handleClose = _ref.handleClose,
               handleSelect = _ref.handleSelect,
               handleRemove = _ref.handleRemove;
@@ -78923,6 +78939,7 @@ object-assign
                   alt: 'icon',
                 })
               ),
+              React.createElement(Type, null, type, ' Skill'),
               React.createElement(ContentContainer, null, content),
               isMobile &&
                 currentState !== LOCKED_STATE &&
@@ -78932,16 +78949,16 @@ object-assign
                   React.createElement(
                     Button,
                     {
-                      onClick: handleSelect,
+                      onClick: handleRemove,
                     },
-                    'Learn'
+                    '-1 Level-'
                   ),
                   React.createElement(
                     Button,
                     {
-                      onClick: handleRemove,
+                      onClick: handleSelect,
                     },
-                    'Unlearn'
+                    '+1 Level'
                   )
                 )
             );
@@ -78950,25 +78967,39 @@ object-assign
           /*#__PURE__*/
           styled__default.h1(
             /*#__PURE__*/
-            _templateObject$1()
+            _templateObject$1(),
+            function(_ref2) {
+              var theme = _ref2.theme;
+              return theme.headingFont;
+            },
+            function(_ref3) {
+              var theme = _ref3.theme;
+              return theme.tooltipTitleFontSize;
+            }
           );
-        var ContentContainer =
+        var Type =
           /*#__PURE__*/
           styled__default.div(
             /*#__PURE__*/
             _templateObject2()
           );
-        var ButtonContainer =
+        var ContentContainer =
           /*#__PURE__*/
           styled__default.div(
             /*#__PURE__*/
             _templateObject3()
           );
+        var ButtonContainer =
+          /*#__PURE__*/
+          styled__default.div(
+            /*#__PURE__*/
+            _templateObject4()
+          );
         var Button =
           /*#__PURE__*/
           styled__default.button(
             /*#__PURE__*/
-            _templateObject4()
+            _templateObject5()
           );
 
         function _templateObject$2() {
@@ -78992,6 +79023,7 @@ object-assign
           var children = props.children,
             tooltip = props.tooltip,
             title = props.title,
+            type = props.type,
             handleSelect = props.handleSelect,
             handleRemove = props.handleRemove,
             currentState = props.currentState;
@@ -79023,12 +79055,13 @@ object-assign
                 handleClose: hideTooltip,
                 content: content,
                 title: title,
+                type: type,
                 currentState: currentState,
                 handleSelect: handleSelect,
                 handleRemove: handleRemove,
               });
             },
-            [content, title, currentState, handleSelect, handleRemove]
+            [content, title, currentState, handleSelect, handleRemove, type]
           ); // const tooltipContent = React.createElement(() => {
           //   return (
           //     <TooltipContent
@@ -79278,7 +79311,7 @@ object-assign
           return data;
         }
 
-        function _templateObject5() {
+        function _templateObject5$1() {
           var data = _taggedTemplateLiteralLoose([
             '\n      animation: ',
             ' 1s infinite alternate;\n      box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5);\n\n      &:after,\n      &:before {\n        border: 0 solid;\n        border-image-source: ',
@@ -79290,7 +79323,7 @@ object-assign
             ';\n        }\n      }\n    ',
           ]);
 
-          _templateObject5 = function _templateObject5() {
+          _templateObject5$1 = function _templateObject5() {
             return data;
           };
 
@@ -79517,7 +79550,7 @@ object-assign
               return (
                 props.unlocked &&
                 css(
-                  _templateObject5(),
+                  _templateObject5$1(),
                   shadowpulse,
                   function(_ref5) {
                     var theme = _ref5.theme;
@@ -79642,7 +79675,7 @@ object-assign
 
         function _templateObject2$3() {
           var data = _taggedTemplateLiteralLoose([
-            '\n  display: flex;\n  justify-content: center;\n  position: relative;\n',
+            '\n  display: flex;\n  justify-content: center;\n  position: relative;\n  column-gap: 50px;\n',
           ]);
 
           _templateObject2$3 = function _templateObject2() {
@@ -79692,11 +79725,12 @@ object-assign
             title = skill.title,
             tooltip = skill.tooltip,
             id = skill.id,
-            optional = skill.optional;
+            optional = skill.optional,
+            type = skill.type;
 
           var _React$useState = React__default.useState(0),
             parentPosition = _React$useState[0],
-            setParentPosition = _React$useState[1]; // const [learned, handleLearnedChange] = React.useState(skill.learned);
+            setParentPosition = _React$useState[1];
 
           var skillNodeRef = React__default.useRef(null);
           var childWidth = React__default.useRef(0);
@@ -79755,7 +79789,7 @@ object-assign
               return null;
             }
 
-            if (learned === skill.learned) {
+            if (learned === skill.actualLearned) {
               return;
             }
 
@@ -79787,11 +79821,7 @@ object-assign
               if (
                 childrenLearnedState &&
                 childrenLearnedState.filter(function(child) {
-                  return (
-                    (child === null || child === void 0
-                      ? void 0
-                      : child.learned) > 0
-                  );
+                  return child.learned > 0;
                 }).length > 0
               ) {
                 return;
@@ -79841,6 +79871,7 @@ object-assign
                 {
                   title: title,
                   tooltip: tooltip,
+                  type: type,
                   handleSelect: handleClick,
                   handleRemove: handleRightClick,
                   currentState: nodeState,
@@ -80169,8 +80200,8 @@ object-assign
             state = props.state;
           var width =
             direction === 'left'
-              ? parentPosition - childPosition - 6
-              : childPosition - parentPosition - 6;
+              ? parentPosition - childPosition - 6 + 5
+              : childPosition - parentPosition - 6 + 5;
           return React__default.createElement(AngledLineHoriztonal, {
             'data-testid': 'middle-angled-line',
             direction: direction,
@@ -80704,7 +80735,7 @@ object-assign
                 return updateSkillState(
                   skill.id,
                   UNLOCKED_STATE,
-                  0,
+                  skill.learned,
                   skill.optional
                 );
               }
@@ -80946,12 +80977,12 @@ object-assign
           return data;
         }
 
-        function _templateObject5$1() {
+        function _templateObject5$2() {
           var data = _taggedTemplateLiteralLoose([
             '\n      transform: rotate(180deg);\n    ',
           ]);
 
-          _templateObject5$1 = function _templateObject5() {
+          _templateObject5$2 = function _templateObject5() {
             return data;
           };
 
@@ -81150,7 +81181,7 @@ object-assign
             },
             function(_ref13) {
               var isVisible = _ref13.isVisible;
-              return isVisible && css$6(_templateObject5$1());
+              return isVisible && css$6(_templateObject5$2());
             }
           );
         var StyledTippy$1 =
@@ -82064,6 +82095,7 @@ object-assign
               levels: skill.levels,
               parentId: skill.parentId,
               requiredLevel: skill.requiredLevel,
+              type: skill.type,
             };
           });
         }
@@ -82880,7 +82912,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '58383' + '/'
+            protocol + '://' + hostname + ':' + '54158' + '/'
           );
 
           ws.onmessage = function(event) {

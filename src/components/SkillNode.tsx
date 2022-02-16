@@ -49,7 +49,7 @@ function SkillNode({
   handleNodeSelect = () => null,
   handleNodeRemove = () => null,
 }: Props) {
-  const { children, title, tooltip, id, optional } = skill;
+  const { children, title, tooltip, id, optional, type } = skill;
   const [parentPosition, setParentPosition] = React.useState(0);
   const skillNodeRef: React.RefObject<HTMLDivElement> = React.useRef(null);
   const childWidth: React.MutableRefObject<number> = React.useRef(0);
@@ -160,6 +160,7 @@ function SkillNode({
         <Tooltip
           title={title}
           tooltip={tooltip}
+          type={type}
           handleSelect={handleClick}
           handleRemove={handleRightClick}
           currentState={nodeState}
@@ -213,4 +214,5 @@ const SkillTreeSegmentWrapper = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  column-gap: 50px;
 `;
