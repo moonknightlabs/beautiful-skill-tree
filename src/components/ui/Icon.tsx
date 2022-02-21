@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // @ts-ignore
-import skillLock from '../../images/skillLock.png';
+// import skillLock from '../../images/skillLock.png';
 import { LOCKED_STATE } from '../constants';
 export interface Props {
   containerWidth: number;
@@ -26,9 +26,9 @@ const Icon = React.memo(function({
 }: Props) {
   return (
     <StyledIcon data-testid="icon-container" containerWidth={containerWidth}>
-      {currentState === LOCKED_STATE && (
+      {/* {currentState === LOCKED_STATE && (
         <LockImage src={skillLock} alt={'Locked'} />
-      )}
+      )} */}
       <Image src={src} alt={title} locked={currentState === LOCKED_STATE} />
     </StyledIcon>
   );
@@ -50,18 +50,18 @@ const Image = styled.img<ImageProps>`
   height: 75%;
   margin: auto;
   width: 75%;
-  ${props =>
+  /* ${props =>
     props.locked &&
     `
     opacity: 0.3;
-  `}
+  `} */
 `;
 
-const LockImage = styled.img`
-  pointer-events: none;
-  height: 100%;
-  margin: auto;
-  width: 100%;
-  z-index: 2;
-  position: absolute;
-`;
+// const LockImage = styled.img`
+//   pointer-events: none;
+//   height: 100%;
+//   margin: auto;
+//   width: 100%;
+//   z-index: 2;
+//   position: absolute;
+// `;
