@@ -27,6 +27,7 @@ export interface Props {
   disabled?: boolean;
   currentLevel: string | number;
   skillPoint: string | number;
+  isOwner: boolean;
   handleSave?: (
     storage: ContextStorage,
     treeId: string,
@@ -49,6 +50,7 @@ function SkillTree({
   treeId,
   savedData,
   skillPoint,
+  isOwner,
   handleSave,
   handleNodeSelect,
   handleNodeRemove,
@@ -114,6 +116,7 @@ function SkillTree({
                       skill={skill}
                       hasParent={false}
                       parentPosition={0}
+                      isOwner={isOwner}
                       parentHasMultipleChildren={false}
                       skillPoint={skillPoint}
                     />

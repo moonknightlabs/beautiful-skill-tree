@@ -428,6 +428,7 @@ var TooltipContent =
       title = _ref.title,
       currentState = _ref.currentState,
       type = _ref.type,
+      isOwner = _ref.isOwner,
       handleClose = _ref.handleClose,
       handleSelect = _ref.handleSelect,
       handleRemove = _ref.handleRemove;
@@ -457,7 +458,8 @@ var TooltipContent =
       ),
       React.createElement(Type, null, type, ' Skill'),
       React.createElement(ContentContainer, null, content),
-      isMobile &&
+      isOwner &&
+        isMobile &&
         currentState !== LOCKED_STATE &&
         React.createElement(
           ButtonContainer,
@@ -540,6 +542,7 @@ function Tooltip(props) {
     tooltip = props.tooltip,
     title = props.title,
     type = props.type,
+    isOwner = props.isOwner,
     handleSelect = props.handleSelect,
     handleRemove = props.handleRemove,
     currentState = props.currentState;
@@ -572,6 +575,7 @@ function Tooltip(props) {
         title: title,
         type: type,
         currentState: currentState,
+        isOwner: isOwner,
         handleSelect: handleSelect,
         handleRemove: handleRemove,
       });
@@ -636,9 +640,25 @@ var StyledTippy =
     }
   );
 
+const img$1 =
+  'data:image/png;base64,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';
+
+function _templateObject3$1() {
+  var data = _taggedTemplateLiteralLoose([
+    '\n  pointer-events: none;\n  height: 100%;\n  margin: auto;\n  width: 100%;\n  z-index: 2;\n  position: absolute\n',
+  ]);
+
+  _templateObject3$1 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject2$1() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  pointer-events: none;\n  height: 75%;\n  margin: auto;\n  width: 75%;\n',
+    '\n  pointer-events: none;\n  height: 75%;\n  margin: auto;\n  width: 75%;\n  ',
+    '\n',
   ]);
 
   _templateObject2$1 = function _templateObject2() {
@@ -662,16 +682,23 @@ var Icon =
   React__default.memo(function(_ref) {
     var src = _ref.src,
       title = _ref.title,
-      containerWidth = _ref.containerWidth;
+      containerWidth = _ref.containerWidth,
+      currentState = _ref.currentState;
     return React__default.createElement(
       StyledIcon,
       {
         'data-testid': 'icon-container',
         containerWidth: containerWidth,
       },
+      currentState === LOCKED_STATE &&
+        React__default.createElement(LockImage, {
+          src: img$1,
+          alt: 'Locked',
+        }),
       React__default.createElement(Image, {
         src: src,
         alt: title,
+        locked: currentState === LOCKED_STATE,
       })
     );
   });
@@ -692,7 +719,16 @@ var Image =
   /*#__PURE__*/
   styled__default.img(
     /*#__PURE__*/
-    _templateObject2$1()
+    _templateObject2$1(),
+    function(props) {
+      return props.locked && '\n    opacity: 0.3;\n  ';
+    }
+  );
+var LockImage =
+  /*#__PURE__*/
+  styled__default.img(
+    /*#__PURE__*/
+    _templateObject3$1()
   );
 
 // Since this function reads from the navigator, ensure that all invocation
@@ -851,7 +887,7 @@ function _templateObject4$1() {
   return data;
 }
 
-function _templateObject3$1() {
+function _templateObject3$2() {
   var data = _taggedTemplateLiteralLoose([
     '\n  background: ',
     ';\n  border: 2px solid;\n  border-color: ',
@@ -863,7 +899,7 @@ function _templateObject3$1() {
     '\n',
   ]);
 
-  _templateObject3$1 = function _templateObject3() {
+  _templateObject3$2 = function _templateObject3() {
     return data;
   };
 
@@ -910,7 +946,8 @@ var Node =
       id = props.id,
       currentState = props.currentState,
       skill = props.skill,
-      learned = props.learned; // console.log('Skill', skill);
+      learned = props.learned,
+      isOwner = props.isOwner; // console.log('Skill', skill);
 
     var _skill$color = skill.color,
       color = _skill$color === void 0 ? 'default' : _skill$color;
@@ -934,7 +971,7 @@ var Node =
 
     var checkForClickType = function checkForClickType(e) {
       e.preventDefault();
-      if (isMobile) return;
+      if (isMobile || !isOwner) return;
 
       if (e.button === 0) {
         handleClick();
@@ -966,6 +1003,7 @@ var Node =
             React.createElement(Icon, {
               title: 'node-icon',
               src: skill.icon,
+              currentState: currentState,
               containerWidth: 64,
             }),
             React.createElement(
@@ -1029,7 +1067,7 @@ var StyledNode =
   /*#__PURE__*/
   styled__default.div(
     /*#__PURE__*/
-    _templateObject3$1(),
+    _templateObject3$2(),
     function(_ref) {
       var theme = _ref.theme;
       return theme.nodeBackgroundColor;
@@ -1211,6 +1249,7 @@ function SkillNode(_ref) {
     learned = _ref.learned,
     skillPoint = _ref.skillPoint,
     childrenLearnedState = _ref.childrenLearnedState,
+    isOwner = _ref.isOwner,
     handleLearnedChange = _ref.handleLearnedChange,
     incSkillCount = _ref.incSkillCount,
     updateSkillState = _ref.updateSkillState,
@@ -1359,6 +1398,7 @@ function SkillNode(_ref) {
           title: title,
           tooltip: tooltip,
           type: type,
+          isOwner: isOwner,
           handleSelect: handleClick,
           handleRemove: handleRightClick,
           currentState: nodeState,
@@ -1367,6 +1407,7 @@ function SkillNode(_ref) {
           handleClick: handleClick,
           handleRightClick: handleRightClick,
           id: id,
+          isOwner: isOwner,
           currentState: nodeState,
           learned: learned,
           skill: skill,
@@ -1384,6 +1425,7 @@ function SkillNode(_ref) {
             hasParent: true,
             currentLevel: currentLevel,
             parentPosition: parentPosition,
+            isOwner: isOwner,
             parentHasMultipleChildren: hasMultipleChildren,
             shouldBeUnlocked:
               nodeState === SELECTED_STATE &&
@@ -1423,7 +1465,7 @@ function _templateObject4$2() {
   return data;
 }
 
-function _templateObject3$2() {
+function _templateObject3$3() {
   var data = _taggedTemplateLiteralLoose([
     '\n  background: linear-gradient(\n    to right,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(255, 255, 255, 0) 51%,\n    rgba(255, 255, 255, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
     ';\n  height: 4px;\n  opacity: 0.5;\n  transform: rotate(90deg);\n  transform-origin: 0 0;\n  transition: opacity 0.6s;\n  width: 56px;\n\n  ',
@@ -1431,7 +1473,7 @@ function _templateObject3$2() {
     '\n',
   ]);
 
-  _templateObject3$2 = function _templateObject3() {
+  _templateObject3$3 = function _templateObject3() {
     return data;
   };
 
@@ -1498,7 +1540,7 @@ var StyledLine =
   /*#__PURE__*/
   styled__default.div(
     /*#__PURE__*/
-    _templateObject3$2(),
+    _templateObject3$3(),
     function(_ref2) {
       var theme = _ref2.theme;
       return theme.edgeBorder;
@@ -1538,12 +1580,12 @@ var StyledAngledLine =
     }
   );
 
-function _templateObject3$3() {
+function _templateObject3$4() {
   var data = _taggedTemplateLiteralLoose([
     '\n  from,\n  33% {\n    background-position: right top;\n  }\n\n  to {\n    background-position: left bottom;\n  }\n',
   ]);
 
-  _templateObject3$3 = function _templateObject3() {
+  _templateObject3$4 = function _templateObject3() {
     return data;
   };
 
@@ -1623,15 +1665,15 @@ var slideDownAngledLineTop =
   /*#__PURE__*/
   keyframes$2(
     /*#__PURE__*/
-    _templateObject3$3()
+    _templateObject3$4()
   );
 
-function _templateObject3$4() {
+function _templateObject3$5() {
   var data = _taggedTemplateLiteralLoose([
     '\n  from,\n  30% {\n    background-position: right top;\n  }\n\n  to {\n    background-position: left bottom;\n  }\n',
   ]);
 
-  _templateObject3$4 = function _templateObject3() {
+  _templateObject3$5 = function _templateObject3() {
     return data;
   };
 
@@ -1715,15 +1757,15 @@ var slideDownAngledLineMiddle =
   /*#__PURE__*/
   keyframes$3(
     /*#__PURE__*/
-    _templateObject3$4()
+    _templateObject3$5()
   );
 
-function _templateObject3$5() {
+function _templateObject3$6() {
   var data = _taggedTemplateLiteralLoose([
     '\n  from,\n  70% {\n    background-position: right top;\n  }\n\n  to {\n    background-position: left bottom;\n  }\n',
   ]);
 
-  _templateObject3$5 = function _templateObject3() {
+  _templateObject3$6 = function _templateObject3() {
     return data;
   };
 
@@ -1803,7 +1845,7 @@ var slideDownAngledLineBottom =
   /*#__PURE__*/
   keyframes$4(
     /*#__PURE__*/
-    _templateObject3$5()
+    _templateObject3$6()
   );
 
 function SkillEdge(props) {
@@ -2133,7 +2175,8 @@ function SkillTreeSegment(_ref) {
     parentPosition = _ref.parentPosition,
     shouldBeUnlocked = _ref.shouldBeUnlocked,
     currentLevel = _ref.currentLevel,
-    skillPoint = _ref.skillPoint;
+    skillPoint = _ref.skillPoint,
+    isOwner = _ref.isOwner;
 
   var _useContext = React.useContext(SkillContext),
     mounting = _useContext.mounting,
@@ -2251,6 +2294,7 @@ function SkillTreeSegment(_ref) {
         skill: skill,
         learned: learned,
         skillPoint: skillPoint,
+        isOwner: isOwner,
         handleLearnedChange: handleLearnedChange,
         nodeState: nodeState,
         childrenLearnedState: childrenLearnedState,
@@ -2458,7 +2502,7 @@ function _templateObject4$3() {
   return data;
 }
 
-function _templateObject3$6() {
+function _templateObject3$7() {
   var data = _taggedTemplateLiteralLoose([
     '\n      background: ',
     ';\n      border: ',
@@ -2468,7 +2512,7 @@ function _templateObject3$6() {
     ';\n      }\n    ',
   ]);
 
-  _templateObject3$6 = function _templateObject3() {
+  _templateObject3$7 = function _templateObject3() {
     return data;
   };
 
@@ -2581,7 +2625,7 @@ var StyledSkillTreeHeader =
       return (
         isCollapsible &&
         css$6(
-          _templateObject3$6(),
+          _templateObject3$7(),
           function(_ref4) {
             var theme = _ref4.theme;
             return theme.treeBackgroundColor;
@@ -2771,6 +2815,7 @@ function SkillTree(_ref) {
     treeId = _ref.treeId,
     savedData = _ref.savedData,
     skillPoint = _ref.skillPoint,
+    isOwner = _ref.isOwner,
     handleSave = _ref.handleSave,
     handleNodeSelect = _ref.handleNodeSelect,
     handleNodeRemove = _ref.handleNodeRemove,
@@ -2859,6 +2904,7 @@ function SkillTree(_ref) {
                   skill: skill,
                   hasParent: false,
                   parentPosition: 0,
+                  isOwner: isOwner,
                   parentHasMultipleChildren: false,
                   skillPoint: skillPoint,
                 }),

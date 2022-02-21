@@ -11,6 +11,7 @@ type Props = {
   title: string;
   currentState: NodeState;
   type: string;
+  isOwner: boolean;
   handleClose: () => void;
   handleSelect: () => void;
   handleRemove: () => void;
@@ -21,6 +22,7 @@ const TooltipContent = React.memo(function({
   title,
   currentState,
   type,
+  isOwner,
   handleClose,
   handleSelect,
   handleRemove,
@@ -43,7 +45,7 @@ const TooltipContent = React.memo(function({
       </div>
       <Type>{type} Skill</Type>
       <ContentContainer>{content}</ContentContainer>
-      {isMobile && currentState !== LOCKED_STATE && (
+      {isOwner && isMobile && currentState !== LOCKED_STATE && (
         <ButtonContainer>
           <Button onClick={handleRemove}>-1 Level</Button>
           <Button onClick={handleSelect}>+1 Level</Button>

@@ -13,6 +13,7 @@ interface Props {
   learned: number;
   skillPoint: string | number;
   childrenLearnedState: SkillData[];
+  isOwner: boolean;
   handleLearnedChange: (newValue: number) => void;
   incSkillCount: (optional?: boolean) => void;
   decSkillCount: (optional?: boolean) => void;
@@ -43,6 +44,7 @@ function SkillNode({
   learned,
   skillPoint,
   childrenLearnedState,
+  isOwner,
   handleLearnedChange,
   incSkillCount,
   updateSkillState,
@@ -79,7 +81,6 @@ function SkillNode({
     if (skillPoint === 0) {
       return;
     }
-
     if (nodeState === UNLOCKED_STATE) {
       if (learned < skill.levels.length) {
         handleLearnedChange(learned + 1);
@@ -161,6 +162,7 @@ function SkillNode({
           title={title}
           tooltip={tooltip}
           type={type}
+          isOwner={isOwner}
           handleSelect={handleClick}
           handleRemove={handleRightClick}
           currentState={nodeState}
@@ -169,6 +171,7 @@ function SkillNode({
             handleClick={handleClick}
             handleRightClick={handleRightClick}
             id={id}
+            isOwner={isOwner}
             currentState={nodeState}
             learned={learned}
             skill={skill}
@@ -186,6 +189,7 @@ function SkillNode({
                 hasParent
                 currentLevel={currentLevel}
                 parentPosition={parentPosition}
+                isOwner={isOwner}
                 parentHasMultipleChildren={hasMultipleChildren}
                 shouldBeUnlocked={
                   nodeState === SELECTED_STATE &&

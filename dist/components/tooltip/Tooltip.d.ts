@@ -7,6 +7,7 @@ interface Props {
   tooltip: Tooltip;
   currentState: NodeState;
   type: string;
+  isOwner: boolean;
   handleSelect: () => void;
   handleRemove: () => void;
 }

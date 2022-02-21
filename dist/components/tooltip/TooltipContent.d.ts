@@ -5,6 +5,7 @@ declare type Props = {
   title: string;
   currentState: NodeState;
   type: string;
+  isOwner: boolean;
   handleClose: () => void;
   handleSelect: () => void;
   handleRemove: () => void;

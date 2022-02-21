@@ -146,6 +146,7 @@ const App = () => {
                   handleNodeRemove={handleNodeRemove}
                   title={`Programming Tree ${skillPoints}`}
                   data={createSkills(tree)}
+                  isOwner={true}
                   skillPoint={skillPoints}
                   handleSave={handleSave}
                   currentLevel={1}

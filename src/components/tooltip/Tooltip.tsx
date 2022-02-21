@@ -16,6 +16,7 @@ interface Props {
   tooltip: Tooltip;
   currentState: NodeState;
   type: string;
+  isOwner: boolean;
   handleSelect: () => void;
   handleRemove: () => void;
 }
@@ -26,6 +27,7 @@ function Tooltip(props: Props) {
     tooltip,
     title,
     type,
+    isOwner,
     handleSelect,
     handleRemove,
     currentState,
@@ -54,6 +56,7 @@ function Tooltip(props: Props) {
         title={title}
         type={type}
         currentState={currentState}
+        isOwner={isOwner}
         handleSelect={handleSelect}
         handleRemove={handleRemove}
       />

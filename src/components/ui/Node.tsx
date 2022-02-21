@@ -18,6 +18,7 @@ interface Props {
   currentState: string;
   skill: Skill;
   learned: number;
+  isOwner: boolean;
 }
 
 interface StyledNodeProps {
@@ -44,6 +45,7 @@ const Node = React.forwardRef(function Node(
     currentState,
     skill,
     learned,
+    isOwner,
   } = props;
   // console.log('Skill', skill);
   const { color = 'default' } = skill;
@@ -64,7 +66,7 @@ const Node = React.forwardRef(function Node(
 
   const checkForClickType = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    if (isMobile) return;
+    if (isMobile || !isOwner) return;
     if (e.button === 0) {
       handleClick();
     } else if (e.button === 2) {
@@ -89,7 +91,12 @@ const Node = React.forwardRef(function Node(
     >
       {'icon' in skill ? (
         <IconNode>
-          <Icon title="node-icon" src={skill.icon} containerWidth={64} />
+          <Icon
+            title="node-icon"
+            src={skill.icon}
+            currentState={currentState}
+            containerWidth={64}
+          />
           <LevelNode>
             {/* {skill.learned}/{skill.levels.length} */}
             {learned}/{skill.levels.length}

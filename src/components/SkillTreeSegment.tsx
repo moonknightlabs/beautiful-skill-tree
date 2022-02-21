@@ -11,6 +11,7 @@ type Props = {
   skill: Skill;
   parentPosition: number;
   parentHasMultipleChildren: boolean;
+  isOwner: boolean;
   shouldBeUnlocked: boolean;
   currentLevel: string | number | number;
   skillPoint: string | number;
@@ -24,6 +25,7 @@ function SkillTreeSegment({
   shouldBeUnlocked,
   currentLevel,
   skillPoint,
+  isOwner,
 }: Props) {
   const {
     mounting,
@@ -129,6 +131,7 @@ function SkillTreeSegment({
           skill={skill}
           learned={learned}
           skillPoint={skillPoint}
+          isOwner={isOwner}
           handleLearnedChange={handleLearnedChange}
           nodeState={nodeState}
           childrenLearnedState={childrenLearnedState}
