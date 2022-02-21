@@ -721,7 +721,7 @@ var Image =
     /*#__PURE__*/
     _templateObject2$1(),
     function(props) {
-      return props.locked && '\n    opacity: 0.3;\n  ';
+      return props.locked && '\n    opacity: 0.2;\n  ';
     }
   );
 var LockImage =
@@ -1467,7 +1467,7 @@ function _templateObject4$2() {
 
 function _templateObject3$3() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  background: linear-gradient(\n    to right,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(255, 255, 255, 0) 51%,\n    rgba(255, 255, 255, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
+    '\n  background: linear-gradient(\n    to right,\n    rgba(49, 208, 170, 1) 0%,\n    rgba(49, 208, 170, 1) 50%,\n    rgba(49, 208, 170, 0) 51%,\n    rgba(49, 208, 170, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
     ';\n  height: 4px;\n  opacity: 0.5;\n  transform: rotate(90deg);\n  transform-origin: 0 0;\n  transition: opacity 0.6s;\n  width: 56px;\n\n  ',
     '\n\n  ',
     '\n',
@@ -1555,7 +1555,7 @@ var StyledLine =
 
 function _templateObject$7() {
   var data = _taggedTemplateLiteralLoose([
-    '\n  background: linear-gradient(\n    to right,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(255, 255, 255, 0) 51%,\n    rgba(255, 255, 255, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
+    '\n  background: linear-gradient(\n    to right,\n    rgba(49, 208, 170, 1) 0%,\n    rgba(49, 208, 170, 1) 50%,\n    rgba(49, 208, 170, 0) 51%,\n    rgba(49, 208, 170, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
     ';\n  height: 4px;\n  position: absolute;\n  opacity: 0.5;\n  transition: opacity 0.6s;\n\n  ',
     '\n',
   ]);

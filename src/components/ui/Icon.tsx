@@ -53,7 +53,7 @@ const Image = styled.img<ImageProps>`
   ${props =>
     props.locked &&
     `
-    opacity: 0.3;
+    opacity: 0.2;
   `}
 `;
 

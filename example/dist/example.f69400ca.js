@@ -78676,8 +78676,8 @@ object-assign
           tooltipBackgroundColor: 'white',
           tooltipFontColor: '#16181c',
           tooltipZIndex: 99999,
-          nodeBackgroundColor: 'transparent',
-          nodeBorderColor: 'transparent',
+          nodeBackgroundColor: '#282c34',
+          nodeBorderColor: 'white',
           nodeAlternativeFontColor: 'white',
           nodeAltenativeActiveFontColor: 'white',
           nodeOverlayColor: 'white',
@@ -79981,7 +79981,7 @@ object-assign
 
         function _templateObject3$3() {
           var data = _taggedTemplateLiteralLoose([
-            '\n  background: linear-gradient(\n    to right,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(255, 255, 255, 0) 51%,\n    rgba(255, 255, 255, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
+            '\n  background: linear-gradient(\n    to right,\n    rgba(49, 208, 170, 1) 0%,\n    rgba(49, 208, 170, 1) 50%,\n    rgba(49, 208, 170, 0) 51%,\n    rgba(49, 208, 170, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
             ';\n  height: 4px;\n  opacity: 0.5;\n  transform: rotate(90deg);\n  transform-origin: 0 0;\n  transition: opacity 0.6s;\n  width: 56px;\n\n  ',
             '\n\n  ',
             '\n',
@@ -80070,7 +80070,7 @@ object-assign
 
         function _templateObject$7() {
           var data = _taggedTemplateLiteralLoose([
-            '\n  background: linear-gradient(\n    to right,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(255, 255, 255, 0) 51%,\n    rgba(255, 255, 255, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
+            '\n  background: linear-gradient(\n    to right,\n    rgba(49, 208, 170, 1) 0%,\n    rgba(49, 208, 170, 1) 50%,\n    rgba(49, 208, 170, 0) 51%,\n    rgba(49, 208, 170, 0) 100%\n  );\n  background-size: 210% 100%;\n  background-position: right top;\n  border: ',
             ';\n  height: 4px;\n  position: absolute;\n  opacity: 0.5;\n  transition: opacity 0.6s;\n\n  ',
             '\n',
           ]);
@@ -82959,7 +82959,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '64074' + '/'
+            protocol + '://' + hostname + ':' + '53157' + '/'
           );
 
           ws.onmessage = function(event) {

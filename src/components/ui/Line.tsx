@@ -52,10 +52,10 @@ const slidedown = keyframes`
 const StyledLine = styled.div<StyledLineProps>`
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0) 51%,
-    rgba(255, 255, 255, 0) 100%
+    rgba(49, 208, 170, 1) 0%,
+    rgba(49, 208, 170, 1) 50%,
+    rgba(49, 208, 170, 0) 51%,
+    rgba(49, 208, 170, 0) 100%
   );
   background-size: 210% 100%;
   background-position: right top;
