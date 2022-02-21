@@ -1,5 +1,6 @@
 import React from 'react';
-import SquatIcon from './squat.svg';
+//@ts-ignore
+import SquatIcon from './skill.png';
 import { SkillType, SavedDataType } from '../src';
 import { Skill } from 'models';
 
