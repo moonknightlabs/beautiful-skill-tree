@@ -83,6 +83,8 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@tippy.js/react": "^3.1.1",
     "lodash": "^4.17.15",
     "lodash-es": "^4.17.15",

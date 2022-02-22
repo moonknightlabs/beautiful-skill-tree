@@ -6,7 +6,9 @@ import Icon from './Icon';
 import isIOSDevice from '../../helpers/isIOS';
 import { SkillThemeType } from '../../';
 import useMobile from '../../hooks/useMobile';
-
+// import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+// import CheckBoxTwoToneIcon from '@material-ui/icons/CheckBoxTwoTone';
 const keyframes = require('styled-components').keyframes;
 const css: BaseThemedCssFunction<SkillThemeType> = require('styled-components')
   .css;
@@ -91,6 +93,11 @@ const Node = React.forwardRef(function Node(
     >
       {'icon' in skill ? (
         <IconNode>
+          {skill.availableInGame && (
+            <AvailableInGameNode>
+              <CheckBoxIcon />
+            </AvailableInGameNode>
+          )}
           <Icon
             title="node-icon"
             src={skill.icon}
@@ -273,6 +280,14 @@ const LevelNode = styled.div`
   }
 `;
 
+const AvailableInGameNode = styled.div`
+  background: #2a2936;
+  color: #31d0aa;
+  position: absolute;
+  left: -15px;
+  top: -10px;
+  z-index: 99;
+`;
 const TextLevelNode = styled.div`
   background-color: black;
   position: absolute;

@@ -59,16 +59,29 @@ const App = () => {
     // console.log('selected node - ', e.key);
     // console.log('new state - ', e.state);
   }
+  const theme = {
+    backgroundColor: 'transparent',
+    border: '1px solid transparent',
+    primaryFont: 'Montserrat',
+    headingFont: 'American Captain',
+    headingFontColor: 'transparent',
+    headingHoverColor: '#444453',
+    nodeBorderColor: 'transparent',
+    nodeBackgroundColor: 'transparent',
+    nodeActiveBackgroundColor: '#31d0aa',
+    tooltipTitleFontSize: '30px',
+    treeBackgroundColor: '#2A2935',
+    nodeHoverBorder: '4px solid #31d0aa',
+    nodeHoverBorderColor: `linear-gradient(
+      to right,
+      #31d0aa 0%,
+      #31d0aa 100%
+    )`,
+    edgeBorder: '1px solid #4F4F4F',
+  };
   return (
     <SkillProvider>
-      <SkillTreeGroup
-        theme={{
-          headingFont: 'impact',
-          nodeAlternativeActiveBackgroundColor: 'blue',
-          nodeAlternativeFontColor: '#F7B538',
-          nodeAltenativeActiveFontColor: 'white',
-        }}
-      >
+      <SkillTreeGroup theme={theme}>
         {({
           skillCount,
           selectedSkillCount,

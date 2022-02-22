@@ -48,6 +48,7 @@ interface BaseSkill {
   job: string;
   jobName: string;
   type: string;
+  availableInGame: boolean;
 }
 interface MajorSkill extends BaseSkill {
   icon: string;
