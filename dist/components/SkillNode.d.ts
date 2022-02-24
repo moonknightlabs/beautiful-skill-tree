@@ -38,6 +38,7 @@ declare function SkillNode({
   skillPoint,
   childrenLearnedState,
   isOwner,
+  incSkillCount,
   handleLearnedChange,
   updateSkillState,
   handleNodeSelect,

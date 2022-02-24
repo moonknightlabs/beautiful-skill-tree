@@ -1273,6 +1273,7 @@ function SkillNode(_ref) {
     skillPoint = _ref.skillPoint,
     childrenLearnedState = _ref.childrenLearnedState,
     isOwner = _ref.isOwner,
+    incSkillCount = _ref.incSkillCount,
     handleLearnedChange = _ref.handleLearnedChange,
     updateSkillState = _ref.updateSkillState,
     _ref$handleNodeSelect = _ref.handleNodeSelect,
@@ -1403,7 +1404,7 @@ function SkillNode(_ref) {
   React__default.useEffect(
     function() {
       if (learned === skill.levels.length) {
-        console.log('TESTING');
+        incSkillCount(optional);
         handleNodeSelect(id, SELECTED_STATE, skill, learned);
         return updateSkillState(id, SELECTED_STATE, learned, optional);
       }
