@@ -1403,6 +1403,7 @@ function SkillNode(_ref) {
   React__default.useEffect(
     function() {
       if (learned === skill.levels.length) {
+        console.log('TESTING');
         handleNodeSelect(id, SELECTED_STATE, skill, learned);
         return updateSkillState(id, SELECTED_STATE, learned, optional);
       }
