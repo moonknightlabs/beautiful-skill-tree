@@ -45,7 +45,7 @@ const App = () => {
 
   function handleNodeSelect(e: NodeSelectEvent) {
     setSkillPoints(skillPoints - 1);
-
+    console.log('Handle Node Select run');
     // console.log('Increment');
     // console.log(e);
     // console.log('selected node - ', e.key);

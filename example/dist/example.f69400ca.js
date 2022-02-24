@@ -94072,17 +94072,10 @@ object-assign
                     learned + 1,
                     optional
                   );
-                }
-
-                if (learned + 1 === skill.levels.length) {
-                  handleNodeSelect(id, SELECTED_STATE, skill, learned + 1);
-                  return updateSkillState(
-                    id,
-                    SELECTED_STATE,
-                    learned + 1,
-                    optional
-                  );
-                }
+                } // if (learned === skill.levels.length - 1) {
+                //   handleNodeSelect(id, SELECTED_STATE, skill, learned + 1);
+                //   return updateSkillState(id, SELECTED_STATE, learned + 1, optional);
+                // }
 
                 return;
               }
@@ -94156,9 +94149,16 @@ object-assign
             return function cleanup() {
               window.removeEventListener('resize', throttledHandleResize);
             };
-          }, []); // React.useEffect(() => {
-          // }, [learned]);
-
+          }, []);
+          React__default.useEffect(
+            function() {
+              if (learned === skill.levels.length) {
+                handleNodeSelect(id, SELECTED_STATE, skill, learned);
+                return updateSkillState(id, SELECTED_STATE, learned, optional);
+              }
+            },
+            [learned]
+          );
           var hasMultipleChildren = children.length > 1;
           return React__default.createElement(
             React__default.Fragment,
@@ -97066,6 +97066,7 @@ object-assign
 
           function handleNodeSelect(e) {
             setSkillPoints(skillPoints - 1);
+            console.log('Handle Node Select run');
           }
 
           function handleNodeRemove(e) {
@@ -97235,7 +97236,7 @@ object-assign
           var hostname = '' || location.hostname;
           var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
           var ws = new WebSocket(
-            protocol + '://' + hostname + ':' + '51583' + '/'
+            protocol + '://' + hostname + ':' + '52117' + '/'
           );
 
           ws.onmessage = function(event) {
