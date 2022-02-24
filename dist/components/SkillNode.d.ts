@@ -39,7 +39,6 @@ declare function SkillNode({
   childrenLearnedState,
   isOwner,
   handleLearnedChange,
-  incSkillCount,
   updateSkillState,
   handleNodeSelect,
   handleNodeRemove,

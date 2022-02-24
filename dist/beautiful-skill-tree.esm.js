@@ -1274,7 +1274,6 @@ function SkillNode(_ref) {
     childrenLearnedState = _ref.childrenLearnedState,
     isOwner = _ref.isOwner,
     handleLearnedChange = _ref.handleLearnedChange,
-    incSkillCount = _ref.incSkillCount,
     updateSkillState = _ref.updateSkillState,
     _ref$handleNodeSelect = _ref.handleNodeSelect,
     handleNodeSelect =
@@ -1340,6 +1339,11 @@ function SkillNode(_ref) {
           return updateSkillState(id, UNLOCKED_STATE, learned + 1, optional);
         }
 
+        if (learned + 1 === skill.levels.length) {
+          handleNodeSelect(id, SELECTED_STATE, skill, learned + 1);
+          return updateSkillState(id, SELECTED_STATE, learned + 1, optional);
+        }
+
         return;
       }
     }
@@ -1401,8 +1405,6 @@ function SkillNode(_ref) {
   React__default.useEffect(
     function() {
       if (learned === skill.levels.length) {
-        incSkillCount(optional);
-        handleNodeSelect(id, SELECTED_STATE, skill, learned);
         return updateSkillState(id, SELECTED_STATE, learned, optional);
       }
     },
