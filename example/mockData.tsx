@@ -513,7 +513,7 @@ export function createSkills(data: Skill): any[] {
   return data.map(skill => {
     return {
       id: skill.id,
-      icon: SquatIcon,
+      icon: 'https://service.faraland.io/assets/skills/undefined.png',
       title: skill.name,
       children: createSkills(skill.children),
       tooltip: {

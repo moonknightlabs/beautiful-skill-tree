@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 // @ts-ignore
 import skillLock from '../../images/skillLock.png';
+// @ts-ignore
+import skillDefault from '../../images/skillDefault.png';
 import { LOCKED_STATE } from '../constants';
 export interface Props {
   containerWidth: number;
@@ -29,7 +31,15 @@ const Icon = React.memo(function({
       {currentState === LOCKED_STATE && (
         <LockImage src={skillLock} alt={'Locked'} />
       )}
-      <Image src={src} alt={title} locked={currentState === LOCKED_STATE} />
+      <Image
+        src={src}
+        alt={title}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src = skillDefault;
+        }}
+        locked={currentState === LOCKED_STATE}
+      />
     </StyledIcon>
   );
 });
