@@ -9,6 +9,8 @@ import useMobile from '../../hooks/useMobile';
 // import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 // import CheckBoxTwoToneIcon from '@material-ui/icons/CheckBoxTwoTone';
+//@ts-ignore
+import skillLock from '../../images/skillLock.png';
 const keyframes = require('styled-components').keyframes;
 const css: BaseThemedCssFunction<SkillThemeType> = require('styled-components')
   .css;
@@ -165,7 +167,7 @@ const shadowpulse = keyframes`
 
 const StyledNode = styled.div<StyledNodeProps>`
   background: ${({ theme }) => theme.nodeBackgroundColor};
-  border: 2px solid;
+  padding: 2px 0;
   border-color: ${({ theme }) => theme.nodeBorderColor};
   box-shadow: 0 0 12px 0 rgba(255, 255, 255, 0);
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -176,7 +178,8 @@ const StyledNode = styled.div<StyledNodeProps>`
   position: relative;
   transition: box-shadow 0.6s, opacity 1s;
   user-select: none;
-
+  z-index: 98;
+  
   @media (min-width: 410px) {
     margin: 0 8px;
   }
@@ -190,18 +193,36 @@ const StyledNode = styled.div<StyledNodeProps>`
   ${props =>
     props.selected &&
     css`
+      position: relative;
+      border-radius: 50% / 10%;
+      color: white;
+      width: 65px;
+      height: 68px;
+      text-align: center;
+      text-indent: 0.1em;
       animation: ${shadowburst} 1s 1;
       background: ${({ theme }) =>
         props.color === 'default'
           ? theme.nodeActiveBackgroundColor
           : theme.nodeAlternativeActiveBackgroundColor};
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        bottom: 10%;
+        right: -5%;
+        left: -5%;
+        background: inherit;
+        border-radius: 4% / 50%;
+      }
     `}
 
   ${props =>
     props.unlocked &&
     css`
-      animation: ${shadowpulse} 1s infinite alternate;
-      box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5);
+      /* animation: ${shadowpulse} 1s infinite alternate;
+      box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.5); */
 
       &:after,
       &:before {
@@ -230,7 +251,7 @@ const StyledNode = styled.div<StyledNodeProps>`
         border-right: ${({ theme }) => theme.nodeHoverBorder};
       }
 
-      &:hover,
+      /* &:hover,
       &:focus {
         animation: none;
         box-shadow: 0 0 12px 0 rgba(255, 255, 255, 1);
@@ -242,7 +263,7 @@ const StyledNode = styled.div<StyledNodeProps>`
           transition: width 0.6s, height 0.6s;
           width: ${(props: StyledNodeProps) => (props.isIOS ? 0 : '95%')};
         }
-      }
+      } */
     `}
 
     ${props =>
@@ -267,17 +288,14 @@ const IconNode = styled.div`
 const LevelNode = styled.div`
   background-color: black;
   position: absolute;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 6px 4px;
+  border-radius: 50%;
   font-size: 14px;
-  bottom: -10px;
-  right: -25px;
+  bottom: -15px;
+  right: 22%;
   z-index: 99;
-
-  @media (max-width: 900px) {
-    font-size: 12px;
-    bottom: -15px;
-  }
+  font-weight: bold;
+  border: 2px solid darkgray;
 `;
 
 const AvailableInGameNode = styled.div`

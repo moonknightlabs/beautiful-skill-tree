@@ -28,12 +28,6 @@ export const StyledAngledLine = styled.div<AngledLineProps>`
   border: ${({ theme }) => theme.edgeBorder};
   height: 4px;
   position: absolute;
-  opacity: 0.5;
+  opacity: 1;
   transition: opacity 0.6s;
-
-  ${props =>
-    props.unlocked &&
-    `
-      opacity: 1;
-  `}
 `;

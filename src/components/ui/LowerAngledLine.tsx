@@ -50,8 +50,14 @@ const AngledLineVerticalBottom = styled(StyledAngledLine)<
     `}
 
     ${props =>
+      !props.selected &&
+      `
+      background: #444165;
+      `}
+    ${props =>
       props.selected &&
       css`
+        border: 1px solid #31d0aa;
         animation: ${slideDownAngledLineBottom} 1.2s 1 ease-out;
         background-position: left bottom;
       `}

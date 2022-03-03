@@ -61,22 +61,21 @@ const StyledLine = styled.div<StyledLineProps>`
   background-position: right top;
   border: ${({ theme }) => theme.edgeBorder};
   height: 4px;
-  opacity: 0.5;
+  opacity: 1;
   transform: rotate(90deg);
   transform-origin: 0 0;
-  transition: opacity 0.6s;
   width: 56px;
 
   ${props =>
+    !props.selected &&
+    `
+    background: #444165;
+    `}
+  ${props =>
     props.selected &&
     css`
+      border: 1px solid #31d0aa;
       animation: ${slidedown} 1.2s 1 ease-out;
       background-position: left bottom;
-    `}
-
-  ${props =>
-    props.unlocked &&
-    `
-      opacity: 1;
     `}
 `;

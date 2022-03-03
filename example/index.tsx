@@ -77,7 +77,7 @@ const App = () => {
       #31d0aa 0%,
       #31d0aa 100%
     )`,
-    edgeBorder: '1px solid #4F4F4F',
+    edgeBorder: '1px solid #444165',
   };
   return (
     <SkillProvider>
@@ -160,7 +160,7 @@ const App = () => {
                   title={`Programming Tree ${skillPoints}`}
                   data={createSkills(tree)}
                   isOwner={true}
-                  skillPoint={skillPoints}
+                  skillPoint={1000}
                   handleSave={handleSave}
                   currentLevel={1}
                 />

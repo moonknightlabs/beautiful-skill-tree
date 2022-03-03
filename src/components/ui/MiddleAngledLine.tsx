@@ -21,7 +21,7 @@ function MiddleAngledLine(props: Props) {
   const width =
     direction === 'left'
       ? parentPosition - childPosition - 6 + 5
-      : childPosition - parentPosition - 6 + 5;
+      : childPosition - parentPosition - 6 + 4;
 
   return (
     <AngledLineHoriztonal
@@ -54,8 +54,14 @@ const AngledLineHoriztonal = styled(StyledAngledLine)<
   `}
 
   ${props =>
+    !props.selected &&
+    `
+    background: #444165;
+    `}
+  ${props =>
     props.selected &&
     css`
+      border: 1px solid #31d0aa;
       animation: ${slideDownAngledLineMiddle} 1s 1;
       background-position: left bottom;
     `}

@@ -15,7 +15,7 @@ interface Props {
 
 function UpperAngledLine(props: Props) {
   const { direction, state } = props;
-
+  console.log(direction, state);
   return (
     <AngledLineVerticalTop
       data-testid="upper-angled-line"
@@ -48,11 +48,31 @@ const AngledLineVerticalTop = styled(StyledAngledLine)<AngledLineVerticalProps>`
     `}
 
   ${props =>
+    !props.selected &&
+    props.direction === 'left' &&
+    `
+      background: #444165;
+      `}
+
+  ${props =>
     props.selected &&
+    props.direction === 'left' &&
     css`
+      z-index: 93;
+      border: 1px solid #31d0aa;
       animation: ${slideDownAngledLineTop} 0.3s 1 ease-in;
       background-position: left bottom;
     `}
+
+    ${props =>
+      props.selected &&
+      props.direction === 'right' &&
+      css`
+        z-index: 93;
+        border: 1px solid #31d0aa;
+        animation: ${slideDownAngledLineTop} 0.3s 1 ease-in;
+        background-position: left bottom;
+      `}
 `;
 
 const slideDownAngledLineTop = keyframes`

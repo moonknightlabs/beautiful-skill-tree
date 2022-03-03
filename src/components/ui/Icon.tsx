@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import skillLock from '../../images/skillLock.png';
 // @ts-ignore
 import skillDefault from '../../images/skillDefault.png';
-import { LOCKED_STATE } from '../constants';
+import { SELECTED_STATE, LOCKED_STATE } from '../constants';
 export interface Props {
   containerWidth: number;
   src: string;
@@ -17,7 +17,7 @@ interface StyledIconProps {
 }
 
 interface ImageProps {
-  locked: boolean;
+  selected: boolean;
 }
 
 const Icon = React.memo(function({
@@ -38,7 +38,7 @@ const Icon = React.memo(function({
           currentTarget.onerror = null; // prevents looping
           currentTarget.src = skillDefault;
         }}
-        locked={currentState === LOCKED_STATE}
+        selected={currentState === SELECTED_STATE}
       />
     </StyledIcon>
   );
@@ -53,6 +53,14 @@ const StyledIcon = styled.div.attrs<StyledIconProps>(props => ({
   },
 }))<StyledIconProps>`
   display: flex;
+  &:hover {
+    transition: 0.3s;
+    background: #b6b0aa;
+    border-radius: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 0 12px 0 rgba(255, 255, 255, 1);
+  }
 `;
 
 const Image = styled.img<ImageProps>`
@@ -61,9 +69,11 @@ const Image = styled.img<ImageProps>`
   margin: auto;
   width: 100%;
   ${props =>
-    props.locked &&
+    props.selected &&
     `
-    opacity: 0.2;
+    position: relative;
+    top: 2px;
+    left: 0;
   `}
 `;
 
