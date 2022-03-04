@@ -15,7 +15,6 @@ interface Props {
 
 function UpperAngledLine(props: Props) {
   const { direction, state } = props;
-  console.log(direction, state);
   return (
     <AngledLineVerticalTop
       data-testid="upper-angled-line"

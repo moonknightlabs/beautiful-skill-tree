@@ -197,7 +197,7 @@ const StyledNode = styled.div<StyledNodeProps>`
       border-radius: 50% / 10%;
       color: white;
       width: 65px;
-      height: 68px;
+      height: 72px;
       text-align: center;
       text-indent: 0.1em;
       animation: ${shadowburst} 1s 1;
@@ -293,9 +293,13 @@ const LevelNode = styled.div`
   font-size: 14px;
   bottom: -15px;
   right: 22%;
+  width: 35px;
   z-index: 99;
   font-weight: bold;
   border: 2px solid darkgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const AvailableInGameNode = styled.div`
